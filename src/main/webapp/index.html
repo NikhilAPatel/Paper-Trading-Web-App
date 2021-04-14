@@ -19,7 +19,34 @@
 			 			$(errorDiv).html("<h2>"+result.errorMessage+"<\h2>");
 		 			}else{//Display the stock data
 		 				console.log(result)
-		 				$(homeDiv).html("<h2>Displaying data for "+result.ticker+"<\h2>");
+		 				$(homeDiv).html("\
+		 						<div class=\"info\">\
+		 						<p class=\"ticker\">"+result.ticker+"</p>\
+		 						<br>\
+		 						<p class=\"name\">"+result.name+"</p>\
+		 						<br>\
+		 						<p class=\"exchangeCode\">"+result.exchangeCode+"</p>\
+		 						<br>\
+		 						<br>\
+		 						<p class=\"summary\">Summary</p>\
+		 						<br>\
+		 						<hr class = \"lineDivide\">\
+		 						<br>\
+		 						<br>\
+		 						<p class=\"high\">High Price: "+result.high+"</p>\
+		 						<p class=\"low\">Low Price: "+result.low+"</p>\
+		 						<p class=\"open\">Open Price: "+result.open+"</p>\
+		 						<p class=\"close\">Close: "+result.close+"</p>\
+		 						<p class=\"volume\">Volume: "+result.volume+"</p>\
+		 						<br>\
+		 						<br>\
+		 						<p class=\"descriptionTitle\"><b>Company's Description</b></p>\
+		 						<br>\
+		 						<p class=\"startDate\">Start Date: "+result.startDate+"</p>\
+		 						<br>\
+		 						<p class=\"description\">"+result.description+"</p>\
+		 						</div>\
+		 						");
 		 			}
 		 		}
 		 	});
@@ -31,7 +58,7 @@
 </head>
 <body>
 
-	<div id="homeDiv">
+	<div id="homeDiv" class="homeDiv">
 		<h1 id="title" class="title">STOCK SEARCH</h1>
 		<form name="searchForm" method ="GET" action = "search();" id="search-form">
 			<div class="search">

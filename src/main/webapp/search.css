@@ -6,14 +6,14 @@
     border: 1px #5d53e9 solid;
     padding: 5px 5px 5px 5px;
     position: absolute;
-    top: 250px;
+    top: 100px;
     left: 0;
     z-index: 5;
 }
 
 .corner {
     position: absolute;
-    top: 253px;
+    top: 103px;
     right: 0px;
     height: 20px;
     width: 20px;
@@ -29,7 +29,7 @@
     position: relative;
     width: 190px;
     height: 30px;
-    margin: auto;
+    margin: auto; 
     
 }
 
@@ -39,7 +39,6 @@
 	  font-size: 40pt;
 	  margin: auto;
 	  text-align: center;
-	  top:150px;
 }
 
 .error{
@@ -48,4 +47,115 @@
 	margin: auto;
 	text-align: center;
 	top:300px;
+}
+
+.homeDiv{
+	position: relative;
+	top:50px;
+}
+
+.ticker{
+	position: relative;
+	top:20px;
+	margin:auto;
+	font-size: 30pt;
+}
+
+.name{
+	position: relative;
+	top:20px;
+	margin:auto;
+	font-size: 20pt;
+	color: #6D7379;
+}
+
+.exchangeCode{
+	position: relative;
+	top:20px;
+	margin:auto;
+	font-size: 10pt;
+}
+
+.summary{
+	position: relative;
+	top:20px;
+	margin:auto;
+	font-size: 10pt;
+	color: #6D7379;
+}
+
+.lineDivide{
+	position: relative;
+	top:20px;
+	height: 3px;
+	border: none;
+	margin:auto;
+	background-color: #5E3EAC
+}
+
+.high{
+	position: relative;
+	top:20px;
+	margin:auto;
+	font-size: 10pt;
+}
+
+.low{
+	position: relative;
+	top:20px;
+	margin:auto;
+	font-size: 10pt;
+}
+
+.open{
+	position: relative;
+	top:20px;
+		font-size: 10pt;
+	
+	margin:auto;
+}
+
+.close{
+	position: relative;
+	top:20px;
+	margin:auto;
+	font-size: 10pt;
+}
+
+.volume{
+	position: relative;
+	top:20px;
+	margin:auto;
+	font-size: 10pt;
+}
+
+.descriptionTitle{
+	position: relative;
+	top:20px;
+	margin:auto;
+	font-size: 14pt;
+}
+
+.startDate{
+	position: relative;
+	top:20px;
+	margin:auto;
+	text-align: left;
+	font-size: 10pt;
+}
+
+.description{
+	position: relative;
+	top:20px;
+	margin:auto;
+	text-align: left;
+	font-size: 10pt;
+	line-height: 1.6;
+}
+
+.info{
+	font-family: Arial, Helvetica, sans-serif;
+	margin: auto;
+	text-align: center;
+	width: 60%;
 }
