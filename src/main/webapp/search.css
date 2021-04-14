@@ -36,7 +36,16 @@
 .title{
 	  position: relative;
 	  font-family: Arial, Helvetica, sans-serif;
+	  font-size: 40pt;
 	  margin: auto;
 	  text-align: center;
 	  top:150px;
+}
+
+.error{
+	position: relative;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: auto;
+	text-align: center;
+	top:300px;
 }

@@ -15,8 +15,12 @@
 		 			query: document.searchForm.searchField.value
 		 		},
 		 		success: function(result){
-		 			$(searchDiv).html("<h1>"+result.resText+"<\h1>");
-		 			console.log(test);
+		 			var ticker = document.searchForm.searchField.value
+		 			if(result.hasOwnProperty('error')){
+			 			$(errorDiv).html("<h2>"+result.errorMessage+"<\h2>");
+		 			}else{//Display the stock data
+		 				$(homeDiv).html("<h2>Displaying data for "+ticker+"<\h2>");
+		 			}
 		 		}
 		 	});
 		}
@@ -29,15 +33,13 @@
 
 	<div id="homeDiv">
 		<h1 id="title" class="title">STOCK SEARCH</h1>
-		
 		<form name="searchForm" method ="GET" action = "search();" id="search-form">
 			<div class="search">
 				<input type="text" class="round" id="searchField" name="searchField" placeholder="Enter stock ticker">
 				<input type="button" class ="corner" onclick="search()" id="searchButton" name="searchButton">
 			</div>
-		</form>
-		
-		<div id="searchDiv">test div text</div>
+		</form>		
+		<div id="errorDiv" class = "error"></div>
 	</div>
 		
 	
