@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>SalStocls</title>
+	<title>SalStocks</title>
 	<link rel="stylesheet" type="text/css" href="search.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
@@ -15,11 +15,11 @@
 		 			query: document.searchForm.searchField.value
 		 		},
 		 		success: function(result){
-		 			var ticker = document.searchForm.searchField.value
 		 			if(result.hasOwnProperty('error')){
 			 			$(errorDiv).html("<h2>"+result.errorMessage+"<\h2>");
 		 			}else{//Display the stock data
-		 				$(homeDiv).html("<h2>Displaying data for "+ticker+"<\h2>");
+		 				console.log(result)
+		 				$(homeDiv).html("<h2>Displaying data for "+result.ticker+"<\h2>");
 		 			}
 		 		}
 		 	});
