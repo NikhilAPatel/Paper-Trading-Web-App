@@ -156,3 +156,96 @@
 	text-align: center;
 	width: 60%;
 }
+
+.lticker {
+	position: relative;
+	text-align: left;
+	float:left;
+	font-size: 30pt;
+	width:auto;
+}
+
+.lname {
+	position: relative;
+	text-align: left;
+	float:left;
+	font-size: 20pt;
+	color: #6D7379;
+}
+
+.lexchangeCode {
+	position: relative;
+	text-align: left;
+	float:left;
+	font-size: 10pt;
+}
+
+.lquantity{
+	position: relative;
+	text-align: left;
+	float:left;
+	font-size: 10pt;
+}
+
+.buyButton{
+	position: relative;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+	float:left;
+	text-align: center;
+	text-decoration: none;
+	border: none;
+  	font-size: 10px;
+  	width:60px;
+  	height: 30px;
+}
+
+.hours{
+	position: relative;
+	text-align: left;
+	margin:auto;
+}
+
+.buyfield{
+	width: 40px;
+}
+
+.greenLast{
+	position: relative;
+	text-align: right;
+	float:right;
+	font-size: 30pt;
+	color:#497B2F;
+}
+
+.redLast{
+	position: relative;
+	text-align: right;
+	float:right;
+	font-size: 30pt;
+	color:#D94432;
+}
+.greenPercent{
+	position: relative;
+	text-align: right;
+	float:right;
+	font-size: 20pt;
+	color:#497B2F;
+}
+
+.redPercent{
+	position: relative;
+	text-align: right;
+	float:right;
+	font-size: 20pt;
+	color:#D94432;
+}
+
+.starFormat{
+	position: relative;
+	float:left;
+	padding-left: 5px;
+	width:40px;
+}
+

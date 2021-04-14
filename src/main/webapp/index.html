@@ -3,13 +3,115 @@
 <head>
 	<meta charset="UTF-8">
 	<title>SalStocks</title>
-	<link rel="stylesheet" type="text/css" href="search.css"/>
+	<link rel="stylesheet" type="text/css" href="search3.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://kit.fontawesome.com/3500178f9e.js" crossorigin="anonymous"></script>
 	<script>
-	
-	
 		function search(){
-		 	$.ajax({
+			var loggedIn = sessionStorage.getItem("loggedIn");
+			if(loggedIn=="true"){
+				loggedInSearch();
+			}else{
+				loggedOutSearch();
+			}
+		}
+		
+		function login(){
+			//TODO do login
+			sessionStorage.setItem("loggedIn", true);
+		}
+		
+		function loggedInSearch(){
+			var hoursText="Market Closed on "
+			$.ajax({
+		 		url: "Search",
+		 		data:{
+		 			query: document.searchForm.searchField.value
+		 		},
+		 		success: function(result){
+		 			if(result.hasOwnProperty('error')){
+			 			$(errorDiv).html("<h2>"+result.errorMessage+"<\h2>");
+		 			}else{//Display the stock data
+		 				console.log(result)
+		 				
+		 				var lastStyle="";
+		 				var percentStyle="";
+						var starSrc="star.svg";
+		 				
+		 				if(result.percentChange>=0){
+		 					lastStyle = "greenLast";
+		 					percentStyle = "greenPercent";
+		 				}else{
+		 					lastStyle = "redLast"
+		 					percentStyle = "redPercent";
+		 				}
+		 				
+		 				if(isFavorite(result.ticker)){
+		 					starSrc="filledstar.png";
+		 				}
+		 				
+		 				//put the name of the ticker in session storage
+		 				sessionStorage.setItem("ticker", result.ticker);
+		 				
+		 				var openDetails="\
+						<p class=\"lmid\">Mid Price: "+result.mid+"</p>\
+						<p class=\"laskp\">Ask Price: "+result.askPrice+"</p>\
+						<p class=\"lasks\">Ask Size: "+result.askSize+"</p>\
+						<p class=\"lbidp\">Bid Price: "+result.bidPrice+"</p>\
+						<p class=\"lbids\">Bid Size: "+result.bidSize+"</p>\
+						";
+		 				
+		 				
+		 				$(homeDiv).html("\
+		 						<div class=\"info\">\
+		 						<text id=\"lticker\" class=\"lticker\">"+result.ticker+"</text>\
+		 						<input type=\"image\"  class=\"starFormat\" src=\""+starSrc+"\" onClick=\"favorite()\">\
+		 						<text class=\""+lastStyle+"\">"+result.last+"</text>\
+		 						<br>\
+		 						<br>\
+		 						<br>\
+		 						<text class=\""+percentStyle+"\">"+result.change+"("+result.percentChange+")%</text>\
+		 						<text class=\"lname\">"+result.name+"</text>\
+		 						<br>\
+		 						<br>\
+		 						<text class=\"lexchangeCode\">"+result.exchangeCode+"</text>\
+		 						<br>\
+		 						<br>\
+		 						<text class=\"lquantity\">Quantity: <\label><input type=\"number\" id=\"buyField\" class=\"buyfield\">\
+		 						<br>\
+		 						<br>\
+		 						<button type=\"button\" class=\"buyButton\" value=\"Buy!\" onClick=\"buy()\">Buy</button>\
+		 						<br>\
+		 						<br>\
+		 						<br>\
+		 						<text class=\"hours\">"+hoursText+"</text>\
+		 						<br>\
+		 						<text class=\"summary\">Summary</text>\
+		 						<br>\
+		 						<hr class = \"lineDivide\">\
+		 						<br>\
+		 						<br>\
+		 						<text class=\"lhigh\">High Price: "+result.high+"</text>\
+		 						<text class=\"llow\">Low Price: "+result.low+"</text>\
+		 						<text class=\"lopen\">Open Price: "+result.open+"</text>\
+		 						<p class=\"lclose\">Prev. Close: "+result.prevClose+"</p>\
+		 						<p class=\"lvolume\">Volume: "+result.volume+"</p>\
+		 						"+openDetails+ "<br>\
+		 						<br>\
+		 						<p class=\"descriptionTitle\"><b>Company's Description</b></p>\
+		 						<br>\
+		 						<p class=\"startDate\">Start Date: "+result.startDate+"</p>\
+		 						<br>\
+		 						<p class=\"description\">"+result.description+"</p>\
+		 						</div>\
+		 						");
+		 			}
+		 		}
+		 	});
+		}
+		
+		function loggedOutSearch(){
+			$.ajax({
 		 		url: "Search",
 		 		data:{
 		 			query: document.searchForm.searchField.value
@@ -51,6 +153,21 @@
 		 		}
 		 	});
 		}
+		
+		function buy(){
+			console.log("buying "+ document.getElementById("buyField").value);
+		}
+		
+		function isFavorite(ticker){
+			//TODO
+			return false;
+		}
+		
+		function favorite(){
+			//TODO
+			var ticker = sessionStorage.getItem("ticker");
+			console.log("favoriting "+ticker);
+		}
 	 
 	 
 	 
@@ -67,7 +184,9 @@
 			</div>
 		</form>		
 		<div id="errorDiv" class = "error"></div>
+		
 	</div>
+	
 		
 	
 	<script> 
@@ -81,6 +200,13 @@
             }
         });
         });
+        
+        window.onload = function () {
+            if (sessionStorage.getItem("hasCodeRunBefore") === null) {
+            	sessionStorage.setItem("loggedIn", "true");//TODO change back to false
+            	sessionStorage.setItem("hasCodeRunBefore", true);
+            }
+        }
     </script> 
 
 

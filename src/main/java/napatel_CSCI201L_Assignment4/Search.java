@@ -21,6 +21,14 @@ import models.StockMeta;
 
 import static utils.Constants.tiingo_token;
 
+
+//General todos
+//TODO maybe the close value on logged out search needs to be prevClose
+//TODO Market Status must be open if the difference between current Timestamp (current Timestamp will be of the created using new Date() in javascript) and ‘timestamp’ key is less than 60 seconds.
+//TODO Value of mid can be null even when the market is open, if this happens then you should display ‘-’ instead of null.
+//TODO round last to 2 digits before sending
+//TODO round percentChange to 2 digits before sending
+
 @WebServlet("/Search")
 public class Search extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -49,7 +57,7 @@ public class Search extends HttpServlet {
 	}
 
 	private static String getStockDetails(String ticker) throws IOException {
-		URL url = new URL("https://api.tiingo.com/tiingo/daily/" + ticker + "/prices?token=" + tiingo_token);
+		URL url = new URL("https://api.tiingo.com/iex/" + ticker + "?token=" + tiingo_token);
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		con.setRequestMethod("GET");
 		con.setRequestProperty("Content-Type", "application/json");
@@ -70,7 +78,6 @@ public class Search extends HttpServlet {
 				}
 				Gson gson = new GsonBuilder().create();
 				Stock stock = gson.fromJson(String.valueOf(response).replace("[", "").replace("]", ""), Stock.class);
-				stock.setTicker(ticker);
 				return getAllStockDetails(stock, response.toString());
 			} catch (Exception e) {
 				System.out.println(ticker + " does not exist. All involved trades will be purged.");
@@ -111,6 +118,7 @@ public class Search extends HttpServlet {
 		}
 
 		stock.absorbMeta(stockmeta);
+		stock.generateChange();
 		return gson.toJson(stock);
 	}
 }
