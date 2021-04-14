@@ -3,8 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>SalStocls</title>
+	<link rel="stylesheet" type="text/css" href="search.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
+		
+	
+	
 		function search(){
 		 	$.ajax({
 		 		url: "Search",
@@ -22,11 +26,32 @@
 	</script> 
 </head>
 <body>
-	<h1>Welcome to the home page</h1>
-	<form name="searchForm" method ="GET" action = "search();">
-		<input type="text" id="searchField" name="searchField" placeholder="Enter stock ticker">
-		<input type="button" onclick="search()" id="searchButton" name="searchButton" value="Search">
+	<h1 id="title">STOCK SEARCH</h1>
+	
+	<form name="searchForm" method ="GET" action = "search();" id="search-form">
+		<div class="search">
+			<input type="text" class="round" id="searchField" name="searchField" placeholder="Enter stock ticker">
+			<input type="button" class ="corner" onclick="search()" id="searchButton" name="searchButton" value="Search">
+		</div>
 	</form>
+	
 	<div id="searchDiv"></div>
+	
+	
+	<script> 
+        $(window).ready(function() {
+        $("#search-form").on("keypress", function (event) {
+            var keyPressed = event.keyCode || event.which;
+            if (keyPressed === 13) {
+                event.preventDefault();
+                search();
+                return false;
+            }
+        });
+        });
+    </script> 
+
+
+
 </body>
 </html>
