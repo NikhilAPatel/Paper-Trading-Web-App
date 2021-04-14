@@ -5,7 +5,7 @@
 	<title>SalStocls</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
-		function searchpoop(){
+		function search(){
 		 	$.ajax({
 		 		url: "Search",
 		 		data:{
@@ -23,9 +23,9 @@
 </head>
 <body>
 	<h1>Welcome to the home page</h1>
-	<form name="searchForm" method ="GET" action = "searchpoop();">
-		<input type="text" id="searchField" name="searchField" placeholder="Enter stock ticker" onblur="searchpoop();">
-		<input type="submit" id="searchButton" name="searchButton" value="Search">
+	<form name="searchForm" method ="GET" action = "search();">
+		<input type="text" id="searchField" name="searchField" placeholder="Enter stock ticker">
+		<input type="button" onclick="search()" id="searchButton" name="searchButton" value="Search">
 	</form>
 	<div id="searchDiv"></div>
 </body>
