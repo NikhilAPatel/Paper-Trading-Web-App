@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>SalStocls</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		function searchpoop(){
+		 	$.ajax({
+		 		url: "Search",
+		 		data:{
+		 			query: document.searchForm.searchField.value
+		 		},
+		 		success: function(result){
+		 			$(searchDiv).html("<h1>"+result.resText+"<\h1>");
+		 		}
+		 	});
+		}
+	 
+	 
+	 
+	</script> 
+</head>
+<body>
+	<h1>Welcome to the home page</h1>
+	<form name="searchForm" method ="GET" action = "searchpoop();">
+		<input type="text" id="searchField" name="searchField" placeholder="Enter stock ticker" onblur="searchpoop();">
+		<input type="submit" id="searchButton" name="searchButton" value="Search">
+	</form>
+	<div id="searchDiv"></div>
+</body>
+</html>
