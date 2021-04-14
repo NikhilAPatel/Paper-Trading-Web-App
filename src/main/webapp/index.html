@@ -6,7 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="search.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
-		
 	
 	
 		function search(){
@@ -17,6 +16,7 @@
 		 		},
 		 		success: function(result){
 		 			$(searchDiv).html("<h1>"+result.resText+"<\h1>");
+		 			console.log(test);
 		 		}
 		 	});
 		}
@@ -26,16 +26,19 @@
 	</script> 
 </head>
 <body>
-	<h1 id="title" class="title">STOCK SEARCH</h1>
-	
-	<form name="searchForm" method ="GET" action = "search();" id="search-form">
-		<div class="search">
-			<input type="text" class="round" id="searchField" name="searchField" placeholder="Enter stock ticker">
-			<input type="button" class ="corner" onclick="search()" id="searchButton" name="searchButton">
-		</div>
-	</form>
-	
-	<div id="searchDiv"></div>
+
+	<div id="homeDiv">
+		<h1 id="title" class="title">STOCK SEARCH</h1>
+		
+		<form name="searchForm" method ="GET" action = "search();" id="search-form">
+			<div class="search">
+				<input type="text" class="round" id="searchField" name="searchField" placeholder="Enter stock ticker">
+				<input type="button" class ="corner" onclick="search()" id="searchButton" name="searchButton">
+			</div>
+		</form>
+		
+		<div id="searchDiv">test div text</div>
+	</div>
 		
 	
 	<script> 
