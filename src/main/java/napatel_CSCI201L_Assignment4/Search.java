@@ -25,7 +25,6 @@ import static utils.Constants.tiingo_token;
 //General todos
 //TODO maybe the close value on logged out search needs to be prevClose
 //TODO Market Status must be open if the difference between current Timestamp (current Timestamp will be of the created using new Date() in javascript) and ‘timestamp’ key is less than 60 seconds.
-//TODO Value of mid can be null even when the market is open, if this happens then you should display ‘-’ instead of null.
 //TODO round last to 2 digits before sending
 //TODO round percentChange to 2 digits before sending
 //TODO if addFavorite does fail for some reason, the button never illuminates (which is good), but there is also no error message. I think it is because somehow the ajax callback is never run
@@ -123,6 +122,7 @@ public class Search extends HttpServlet {
 		stock.absorbMeta(stockmeta);
 		stock.generateChange();
 		stock.correctMid();
+		stock.roundVals();
 		return gson.toJson(stock);
 	}
 }

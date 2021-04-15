@@ -1,5 +1,7 @@
 package models;
 
+import static utils.Utils.round;
+
 public class Stock {
 	private float high;
 	private float low;
@@ -164,6 +166,24 @@ public class Stock {
 		if (this.mid == "0" || this.mid==""|| this.mid==null) {
 			this.mid="-";
 		}
+	}
+	
+	public void roundVals() {
+		this.roundLast();
+		this.roundPercentChange();
+		this.roundChange();
+	}
+	
+	public void roundLast() {
+		this.last=round(this.last);
+	}
+	
+	public void roundPercentChange() {
+		this.percentChange=round(this.percentChange);
+	}
+	
+	public void roundChange() {
+		this.change=round(this.change);
 	}
 	
 	@Override
