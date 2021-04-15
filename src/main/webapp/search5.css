@@ -201,10 +201,19 @@
   	height: 30px;
 }
 
-.hours{
+.greenHours{
 	position: relative;
-	text-align: left;
 	margin:auto;
+	text-align:center;
+	background-color: #cbf2d3;
+	color: #5AC43B;
+}
+
+.redHours{
+	position: relative;
+	margin:auto;
+	text-align:center;
+	background-color: #fa8178;
 }
 
 .buyfield{
@@ -216,7 +225,6 @@
 	text-align: right;
 	float:right;
 	font-size: 30pt;
-	color:#5AC43B;
 }
 
 .redLast{
