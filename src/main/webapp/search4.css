@@ -216,7 +216,7 @@
 	text-align: right;
 	float:right;
 	font-size: 30pt;
-	color:#497B2F;
+	color:#5AC43B;
 }
 
 .redLast{
@@ -224,14 +224,14 @@
 	text-align: right;
 	float:right;
 	font-size: 30pt;
-	color:#D94432;
+	color:#EC5D2A;
 }
 .greenPercent{
 	position: relative;
 	text-align: right;
 	float:right;
 	font-size: 20pt;
-	color:#497B2F;
+	color:#5AC43B;
 }
 
 .redPercent{
@@ -239,7 +239,7 @@
 	text-align: right;
 	float:right;
 	font-size: 20pt;
-	color:#D94432;
+	color:#EC5D2A;
 }
 
 .starFormat{
@@ -247,5 +247,13 @@
 	float:left;
 	padding-left: 5px;
 	width:40px;
+}
+
+.caret{
+	position: relative;
+	float:right;
+	padding-right: 5px;
+	width: 20px;
+  	height: auto;
 }
 

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>SalStocks</title>
-	<link rel="stylesheet" type="text/css" href="search3.css"/>
+	<link rel="stylesheet" type="text/css" href="search4.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/3500178f9e.js" crossorigin="anonymous"></script>
 	<script>
@@ -38,14 +38,17 @@
 		 						 				
 		 				var lastStyle="";
 		 				var percentStyle="";
+		 				var caretSrc="";
 						var starSrc="star.svg";
 		 				
 		 				if(result.percentChange>=0){
 		 					lastStyle = "greenLast";
 		 					percentStyle = "greenPercent";
+		 					caretSrc="caret-up.png";
 		 				}else{
 		 					lastStyle = "redLast"
 		 					percentStyle = "redPercent";
+		 					caretSrc="caret-down.png";
 		 				}
 		 				
 		 				//Sets the session storage variable of if this ticker is already a favorite and updates the image
@@ -70,6 +73,7 @@
 		 						<br>\
 		 						<br>\
 		 						<text class=\""+percentStyle+"\">"+result.change+" ("+result.percentChange+")%</text>\
+		 						<img src=\""+caretSrc+"\" class=\"caret\"\>\
 		 						<text class=\"lname\">"+result.name+"</text>\
 		 						<br>\
 		 						<br>\
