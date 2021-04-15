@@ -34,7 +34,7 @@ public class Stock {
 	private boolean marketOpen;
 	private String quoteTimestamp;
 	private String lastSaleTimestamp;
-	
+	private String formattedTimestamp;
 	
 	
 	
@@ -205,7 +205,7 @@ public class Stock {
 	}
 	
 	public void formatTimestamp() {
-		//this.timestamp=this.timestamp.substring(this.timestamp.indexOf("T")+1, this.timestamp.indexOf("T")+9);
+		this.formattedTimestamp=this.timestamp.substring(0, this.timestamp.indexOf("T")+9).replace("T", " ");
 	}
 	
 	public void setMarketOpen() {

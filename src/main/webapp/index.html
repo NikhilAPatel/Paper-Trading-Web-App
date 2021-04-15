@@ -41,10 +41,9 @@
 		 				var percentStyle="";
 		 				var caretSrc="";
 						var starSrc="star.svg";
-						var timeStamp="placeholder timestamp" //TODO
+						var timeStamp=result.formattedTimestamp;
 						var time = new Date();
 						var timeString =time.toLocaleString('en-US', {hour :'numeric', year: 'numeric', month:'numeric', day:'numeric', hour12: false, minute:'numeric', second:'numeric'});
-						console.log(timeString);
 						var hoursText= "<text class=\"redHours\">Market Closed on "+timeString+"</text>";
 		 				
 		 				if(result.percentChange>=0){
