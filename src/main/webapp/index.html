@@ -64,7 +64,7 @@
 		 				$(homeDiv).html("\
 		 						<div class=\"info\">\
 		 						<text id=\"lticker\" class=\"lticker\">"+result.ticker+"</text>\
-		 						<input type=\"image\" id=\"starimage\" class=\"starFormat\" onClick=\"favorite()\">\
+		 						<div id = \"starimage\"></div>\
 		 						<text class=\""+lastStyle+"\">"+result.last+"</text>\
 		 						<br>\
 		 						<br>\
@@ -169,10 +169,10 @@
 				success: function(res){
 					console.log(res);
 					if(res.favorite=="true"){
-						document.getElementById("starimage").setAttribute('src', "filledstar.png");
+						document.getElementById("starimage").innerHTML="<input type=\"image\" class=\"starFormat\" src = \"filledstar.png\" onClick=\"favorite()\"\>";
 						sessionStorage.setItem("tickerFavorite", "true");
 					}else{
-						document.getElementById("starimage").setAttribute('src', "star.svg");
+						document.getElementById("starimage").innerHTML="<input type=\"image\" class=\"starFormat\" src = \"star.svg\" onClick=\"favorite()\"\>";
 						sessionStorage.setItem("tickerFavorite", "true");
 					}
 				}
@@ -205,11 +205,11 @@
 				},
 				success: function(res){
 					if(res.removed=="true"){
-						document.getElementById("starimage").setAttribute('src', "star.svg");
+						document.getElementById("starimage").innerHTML="<input type=\"image\" class=\"starFormat\" src = \"star.svg\" onClick=\"favorite()\"\>";
 						sessionStorage.setItem("tickerFavorite", "false");
 					}else{
-						document.getElementById("starimage").setAttribute('src', "filledstar.png");
-					}
+						document.getElementById("starimage").innerHTML="<input type=\"image\" class=\"starFormat\" src = \"filledstar.png\" onClick=\"favorite()\"\>";
+						}
 				}
 			});
 		}
@@ -223,7 +223,7 @@
 				},
 				success: function(res){
 					if(res.success=="true"){
-						document.getElementById("starimage").setAttribute('src', "filledstar.png");
+						document.getElementById("starimage").innerHTML= "<input type=\"image\" class=\"starFormat\" src = \"filledstar.png\" onClick=\"favorite()\"\>";
 						sessionStorage.setItem("tickerFavorite", "true");
 					}else{
 						alert("Sorry, something went wrong, and we couldn't favorite this stock!");
