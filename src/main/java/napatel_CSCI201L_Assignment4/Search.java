@@ -28,6 +28,7 @@ import static utils.Constants.tiingo_token;
 //TODO Value of mid can be null even when the market is open, if this happens then you should display ‘-’ instead of null.
 //TODO round last to 2 digits before sending
 //TODO round percentChange to 2 digits before sending
+//TODO if addFavorite does fail for some reason, the button never illuminates (which is good), but there is also no error message. I think it is because somehow the ajax callback is never run
 
 @WebServlet("/Search")
 public class Search extends HttpServlet {
@@ -44,7 +45,6 @@ public class Search extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Helloowowowow");
 		String query = request.getParameter("query");
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
