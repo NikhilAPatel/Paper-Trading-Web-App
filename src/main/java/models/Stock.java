@@ -217,8 +217,7 @@ public class Stock {
 		
 		System.out.println(timeNow-lastRefresh);
 		
-		this.marketOpen = timeNow-lastRefresh<60000;
-		
+		this.marketOpen = timeNow-lastRefresh<60000;		
 	}
 	@Override
 	public String toString() {

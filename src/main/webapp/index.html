@@ -45,6 +45,7 @@
 						var time = new Date();
 						var timeString =time.toLocaleString('en-US', {hour :'numeric', year: 'numeric', month:'numeric', day:'numeric', hour12: false, minute:'numeric', second:'numeric'});
 						var hoursText= "<text class=\"redHours\">Market Closed on "+timeString+"</text>";
+						var openDetails ="";
 		 				
 		 				if(result.percentChange>=0){
 		 					lastStyle = "greenLast";
@@ -58,19 +59,20 @@
 		 				
 		 				if(result.marketOpen){
 		 					hoursText="<text class=\"greenHours\">Market Open</text>";
+		 					openDetails="\
+								<p class=\"lmid\">Mid Price: "+result.mid+"</p>\
+								<p class=\"laskp\">Ask Price: "+result.askPrice+"</p>\
+								<p class=\"lasks\">Ask Size: "+result.askSize+"</p>\
+								<p class=\"lbidp\">Bid Price: "+result.bidPrice+"</p>\
+								<p class=\"lbids\">Bid Size: "+result.bidSize+"</p>\
+								";
 		 				}
 		 				
 		 				//Sets the session storage variable of if this ticker is already a favorite and updates the image
 						isFavorite(sessionStorage.getItem("ticker"));
 		 				
 		 				
-		 				var openDetails="\
-						<p class=\"lmid\">Mid Price: "+result.mid+"</p>\
-						<p class=\"laskp\">Ask Price: "+result.askPrice+"</p>\
-						<p class=\"lasks\">Ask Size: "+result.askSize+"</p>\
-						<p class=\"lbidp\">Bid Price: "+result.bidPrice+"</p>\
-						<p class=\"lbids\">Bid Size: "+result.bidSize+"</p>\
-						";
+		 				
 		 				
 		 				
 		 				$(homeDiv).html("\
