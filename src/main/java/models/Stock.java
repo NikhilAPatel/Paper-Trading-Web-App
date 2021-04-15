@@ -2,6 +2,13 @@ package models;
 
 import static utils.Utils.round;
 
+import java.time.LocalTime;
+import java.util.Date;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
+
+
 public class Stock {
 	private float high;
 	private float low;
@@ -24,8 +31,19 @@ public class Stock {
 	private float percentChange;
 	private float change;
 	private float last;
+	private boolean marketOpen;
+	private String quoteTimestamp;
+	private String lastSaleTimestamp;
 	
 	
+	
+	
+	public boolean isMarketOpen() {
+		return marketOpen;
+	}
+	public void setMarketOpen(boolean marketOpen) {
+		this.marketOpen = marketOpen;
+	}
 	public float getLast() {
 		return last;
 	}
@@ -186,6 +204,22 @@ public class Stock {
 		this.change=round(this.change);
 	}
 	
+	public void formatTimestamp() {
+		//this.timestamp=this.timestamp.substring(this.timestamp.indexOf("T")+1, this.timestamp.indexOf("T")+9);
+	}
+	
+	public void setMarketOpen() {
+		Date date = new Date();
+		long timeNow = date.getTime();
+		
+		DateTimeFormatter dtFormatter = ISODateTimeFormat.dateTime();
+		long lastRefresh = dtFormatter.parseDateTime(this.timestamp).getMillis();
+		
+		System.out.println(timeNow-lastRefresh);
+		
+		this.marketOpen = timeNow-lastRefresh<60000;
+		
+	}
 	@Override
 	public String toString() {
 		return "Stock [high=" + high + ", low=" + low + ", open=" + open + ", close=" + close + ", volume=" + volume
@@ -193,8 +227,10 @@ public class Stock {
 				+ exchangeCode + ", startDate=" + startDate + ", date=" + date + ", timestamp=" + timestamp
 				+ ", bidPrice=" + bidPrice + ", askPrice=" + askPrice + ", mid=" + mid + ", bidSize=" + bidSize
 				+ ", askSize=" + askSize + ", prevClose=" + prevClose + ", percentChange=" + percentChange + ", change="
-				+ change + ", last=" + last + "]";
+				+ change + ", last=" + last + ", marketOpen=" + marketOpen + "]";
 	}
+	
+	
 	
 	
 	

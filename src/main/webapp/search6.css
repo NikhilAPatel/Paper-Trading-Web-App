@@ -180,6 +180,13 @@
 	font-size: 10pt;
 }
 
+.ltimestamp {
+	position: relative;
+	text-align: right;
+	float:right;
+	font-size: 10pt;
+}
+
 .lquantity{
 	position: relative;
 	text-align: left;
@@ -206,13 +213,14 @@
 	margin:auto;
 	text-align:center;
 	background-color: #cbf2d3;
-	color: #5AC43B;
+	color:#000000;
 }
 
 .redHours{
 	position: relative;
 	margin:auto;
 	text-align:center;
+	color:#000000;
 	background-color: #fa8178;
 }
 

@@ -24,11 +24,8 @@ import static utils.Constants.tiingo_token;
 
 //General todos
 //TODO maybe the close value on logged out search needs to be prevClose
-//TODO Market Status must be open if the difference between current Timestamp (current Timestamp will be of the created using new Date() in javascript) and ‘timestamp’ key is less than 60 seconds.
-//TODO round last to 2 digits before sending
-//TODO round percentChange to 2 digits before sending
 //TODO if addFavorite does fail for some reason, the button never illuminates (which is good), but there is also no error message. I think it is because somehow the ajax callback is never run
-
+//TODO i don't think measuring time between last refresh and current time actually tells you if the market is closed or not
 //TODO when going back from search to main page, need to delete/reset session variables of ticker and tickerfavorite
 //TODO no internet connection
 
@@ -123,6 +120,8 @@ public class Search extends HttpServlet {
 		stock.generateChange();
 		stock.correctMid();
 		stock.roundVals();
+		stock.formatTimestamp();
+		stock.setMarketOpen();
 		return gson.toJson(stock);
 	}
 }

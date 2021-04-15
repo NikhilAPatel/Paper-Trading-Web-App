@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>SalStocks</title>
-	<link rel="stylesheet" type="text/css" href="search5.css"/>
+	<link rel="stylesheet" type="text/css" href="search6.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/3500178f9e.js" crossorigin="anonymous"></script>
 	<script>
@@ -22,7 +22,6 @@
 		}
 		
 		function loggedInSearch(){
-			var hoursText="Market Closed on "
 			$.ajax({
 		 		url: "Search",
 		 		data:{
@@ -33,6 +32,8 @@
 			 			$(errorDiv).html("<h2>"+result.errorMessage+"<\h2>");
 		 			}else{//Display the stock data
 		 				
+		 				console.log(result);//TODO delete
+		 				
 		 				//put the name of the ticker in session storage
 		 				sessionStorage.setItem("ticker", result.ticker);
 		 						 				
@@ -40,6 +41,11 @@
 		 				var percentStyle="";
 		 				var caretSrc="";
 						var starSrc="star.svg";
+						var timeStamp="placeholder timestamp" //TODO
+						var time = new Date();
+						var timeString =time.toLocaleString('en-US', {hour :'numeric', year: 'numeric', month:'numeric', day:'numeric', hour12: false, minute:'numeric', second:'numeric'});
+						console.log(timeString);
+						var hoursText= "<text class=\"redHours\">Market Closed on "+timeString+"</text>";
 		 				
 		 				if(result.percentChange>=0){
 		 					lastStyle = "greenLast";
@@ -49,6 +55,10 @@
 		 					lastStyle = "redLast"
 		 					percentStyle = "redPercent";
 		 					caretSrc="caret-down.png";
+		 				}
+		 				
+		 				if(result.marketOpen){
+		 					hoursText="<text class=\"greenHours\">Market Open</text>";
 		 				}
 		 				
 		 				//Sets the session storage variable of if this ticker is already a favorite and updates the image
@@ -77,6 +87,8 @@
 		 						<text class=\"lname\">"+result.name+"</text>\
 		 						<br>\
 		 						<br>\
+		 						<br>\
+		 						<text class=\"ltimestamp\">"+timeStamp+"</text>\
 		 						<text class=\"lexchangeCode\">"+result.exchangeCode+"</text>\
 		 						<br>\
 		 						<br>\
