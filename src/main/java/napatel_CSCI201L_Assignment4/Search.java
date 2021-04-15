@@ -30,6 +30,8 @@ import static utils.Constants.tiingo_token;
 //TODO round percentChange to 2 digits before sending
 //TODO if addFavorite does fail for some reason, the button never illuminates (which is good), but there is also no error message. I think it is because somehow the ajax callback is never run
 
+//TODO when going back from search to main page, need to delete/reset session variables of ticker and tickerfavorite
+
 @WebServlet("/Search")
 public class Search extends HttpServlet {
 	private static final long serialVersionUID = 1L;

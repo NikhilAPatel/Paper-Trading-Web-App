@@ -32,8 +32,10 @@
 		 			if(result.hasOwnProperty('error')){
 			 			$(errorDiv).html("<h2>"+result.errorMessage+"<\h2>");
 		 			}else{//Display the stock data
-		 				console.log(result)
 		 				
+		 				//put the name of the ticker in session storage
+		 				sessionStorage.setItem("ticker", result.ticker);
+		 						 				
 		 				var lastStyle="";
 		 				var percentStyle="";
 						var starSrc="star.svg";
@@ -46,12 +48,9 @@
 		 					percentStyle = "redPercent";
 		 				}
 		 				
-		 				if(isFavorite(result.ticker)){
-		 					starSrc="filledstar.png";
-		 				}
+		 				//Sets the session storage variable of if this ticker is already a favorite and updates the image
+						isFavorite(sessionStorage.getItem("ticker"));
 		 				
-		 				//put the name of the ticker in session storage
-		 				sessionStorage.setItem("ticker", result.ticker);
 		 				
 		 				var openDetails="\
 						<p class=\"lmid\">Mid Price: "+result.mid+"</p>\
@@ -65,7 +64,7 @@
 		 				$(homeDiv).html("\
 		 						<div class=\"info\">\
 		 						<text id=\"lticker\" class=\"lticker\">"+result.ticker+"</text>\
-		 						<input type=\"image\" id=\"starimage\" class=\"starFormat\" src=\""+starSrc+"\" onClick=\"favorite()\">\
+		 						<input type=\"image\" id=\"starimage\" class=\"starFormat\" onClick=\"favorite()\">\
 		 						<text class=\""+lastStyle+"\">"+result.last+"</text>\
 		 						<br>\
 		 						<br>\
@@ -159,17 +158,31 @@
 		}
 		
 		function isFavorite(ticker){
-			//TODO
-			return false;
+			var ticker = sessionStorage.getItem("ticker");
+			var user_id = sessionStorage.getItem("user_id");
+			$.ajax({
+				url:"IsFavorite",
+				data: {
+					ticker: ticker,
+					user_id: user_id
+				},
+				success: function(res){
+					console.log(res);
+					if(res.favorite=="true"){
+						document.getElementById("starimage").setAttribute('src', "filledstar.png");
+						sessionStorage.setItem("tickerFavorite", "true");
+					}else{
+						document.getElementById("starimage").setAttribute('src', "star.svg");
+					}
+				}
+			});
 		}
 		
 		function favorite(){
-			//TODO
 			var ticker = sessionStorage.getItem("ticker");
 			var user_id = sessionStorage.getItem("user_id");
-			if(isFavorite(ticker)){
+			if(sessionStorage.getItem("tickerFavorite")=="true"){
 				//TODO move the changing image into the onsuccess of the GET/POS
-				document.getElementById("starimage").setAttribute('src', "star.svg");
 				removeFavorite(ticker, user_id);
 			}else{
 				//TODO move the changing image into the onsuccess of the GET/POS
@@ -178,7 +191,23 @@
 		}
 		
 		function removeFavorite(){
-			
+			var ticker = sessionStorage.getItem("ticker");
+			var user_id = sessionStorage.getItem("user_id");
+			$.ajax({
+				url:"RemoveFavorite",
+				data: {
+					ticker: ticker,
+					user_id: user_id
+				},
+				success: function(res){
+					if(res.removed=="true"){
+						document.getElementById("starimage").setAttribute('src', "star.svg");
+						sessionStorage.setItem("tickerFavorite", "false");
+					}else{
+						document.getElementById("starimage").setAttribute('src', "filledstar.png");
+					}
+				}
+			});
 		}
 		
 		function addFavorite(ticker, user_id){
