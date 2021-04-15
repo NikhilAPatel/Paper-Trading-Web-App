@@ -173,6 +173,7 @@
 						sessionStorage.setItem("tickerFavorite", "true");
 					}else{
 						document.getElementById("starimage").setAttribute('src', "star.svg");
+						sessionStorage.setItem("tickerFavorite", "true");
 					}
 				}
 			});
@@ -181,11 +182,14 @@
 		function favorite(){
 			var ticker = sessionStorage.getItem("ticker");
 			var user_id = sessionStorage.getItem("user_id");
+			console.log("ticker is "+sessionStorage.getItem("tickerFavorite"));
 			if(sessionStorage.getItem("tickerFavorite")=="true"){
 				//TODO move the changing image into the onsuccess of the GET/POS
+				console.log("setting ticker to unfavorate");
 				removeFavorite(ticker, user_id);
 			}else{
 				//TODO move the changing image into the onsuccess of the GET/POS
+				console.log("setting ticker to favorate");
 				addFavorite(ticker, user_id);
 			}
 		}
@@ -220,6 +224,7 @@
 				success: function(res){
 					if(res.success=="true"){
 						document.getElementById("starimage").setAttribute('src', "filledstar.png");
+						sessionStorage.setItem("tickerFavorite", "true");
 					}else{
 						alert("Sorry, something went wrong, and we couldn't favorite this stock!");
 					}
