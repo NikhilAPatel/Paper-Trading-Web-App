@@ -122,6 +122,7 @@ public class Search extends HttpServlet {
 
 		stock.absorbMeta(stockmeta);
 		stock.generateChange();
+		stock.correctMid();
 		return gson.toJson(stock);
 	}
 }

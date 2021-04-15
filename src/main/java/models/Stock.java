@@ -15,7 +15,7 @@ public class Stock {
 	private String timestamp;
 	private float bidPrice;
 	private float askPrice;
-	private float mid;
+	private String mid;
 	private float bidSize;
 	private float askSize;
 	private float prevClose;
@@ -73,10 +73,10 @@ public class Stock {
 	public void setAskPrice(float askPrice) {
 		this.askPrice = askPrice;
 	}
-	public float getMid() {
+	public String getMid() {
 		return mid;
 	}
-	public void setMid(float mid) {
+	public void setMid(String mid) {
 		this.mid = mid;
 	}
 	public float getBidSize() {
@@ -159,6 +159,13 @@ public class Stock {
 		this.exchangeCode=meta.getExchangeCode();
 		this.startDate=meta.getStartDate();
 	}
+	
+	public void correctMid() {
+		if (this.mid == "0" || this.mid==""|| this.mid==null) {
+			this.mid="-";
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "Stock [high=" + high + ", low=" + low + ", open=" + open + ", close=" + close + ", volume=" + volume
