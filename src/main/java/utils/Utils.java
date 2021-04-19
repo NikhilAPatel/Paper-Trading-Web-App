@@ -44,6 +44,16 @@ public final class Utils {
 	public static final boolean marketClosed() {
 		//TODO
 		
+//		Date date = new Date();
+//		long timeNow = date.getTime();
+//		
+//		DateTimeFormatter dtFormatter = ISODateTimeFormat.dateTime();
+//		long lastRefresh = dtFormatter.parseDateTime(this.timestamp).getMillis();
+//		
+//		System.out.println(timeNow-lastRefresh);
+//		
+//		this.marketOpen = timeNow-lastRefresh<60000;	
+		
 		return false;
 	}
 	//TODO also look into making a method that returns an actual Date timestamp or something

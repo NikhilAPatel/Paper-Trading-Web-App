@@ -1,6 +1,7 @@
 package models;
 
 import static utils.Utils.round;
+import static utils.Utils.marketClosed;
 
 import java.time.LocalTime;
 import java.util.Date;
@@ -208,17 +209,8 @@ public class Stock {
 		this.formattedTimestamp=this.timestamp.substring(0, this.timestamp.indexOf("T")+9).replace("T", " ");
 	}
 	
-	public void setMarketOpen() {
-//		Date date = new Date();
-//		long timeNow = date.getTime();
-//		
-//		DateTimeFormatter dtFormatter = ISODateTimeFormat.dateTime();
-//		long lastRefresh = dtFormatter.parseDateTime(this.timestamp).getMillis();
-//		
-//		System.out.println(timeNow-lastRefresh);
-//		
-//		this.marketOpen = timeNow-lastRefresh<60000;		
-		this.marketOpen=true;
+	public void setMarketOpen() {	
+		this.marketOpen=!marketClosed();
 	}
 	@Override
 	public String toString() {
