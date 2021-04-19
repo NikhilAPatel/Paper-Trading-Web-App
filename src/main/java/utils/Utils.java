@@ -18,23 +18,20 @@ public final class Utils {
 		final DecimalFormat f = new DecimalFormat("##.00");
 		return Float.parseFloat(f.format(num));
 	}
-	
-	public static final float getStockPrice(String ticker) {
-		//TODO
-		return 0;
-	}
-	
-	//takes in a boolean value to modify return value: true for Ask and false for Bid
-	public static final float getCurrentSpread(boolean buy) {
+		
+	//Accepts the string of the attribute you want and returns it
+	public static final float getStockAttribute(String attribute) {
 		//TODO
 		float ask = 0;
 		float bid = 0;
 		
 		
-		if(buy) {
+		if(attribute.toLowerCase().equals("ask")) {
 			return ask;
-		}else {
+		}else if(attribute.toLowerCase().equals("bid")){
 			return bid;
+		}else {
+			return -1;
 		}
 	}
 	
@@ -49,7 +46,7 @@ public final class Utils {
 		
 		return false;
 	}
-	
+	//TODO also look into making a method that returns an actual Date timestamp or something
 	public static final String getTimestamp() {
 		//TODO
 		

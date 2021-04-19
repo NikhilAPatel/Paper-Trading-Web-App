@@ -15,7 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import static utils.Constants.dbAddress;
-import static utils.Utils.getCurrentSpread;
+import static utils.Utils.getStockAttribute;
 import static utils.Utils.getUserBalance;
 import static utils.Utils.marketClosed;
 import static utils.Utils.getTimestamp;
@@ -74,7 +74,7 @@ public class Buy extends HttpServlet {
 		
 			
 		//Do buy
-		float ask = getCurrentSpread(true);
+		float ask = getStockAttribute("ask");
 		out.println(buy(user_id, ticker, ask, quantity));
 				
 	}
