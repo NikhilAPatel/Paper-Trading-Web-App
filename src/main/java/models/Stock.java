@@ -209,15 +209,16 @@ public class Stock {
 	}
 	
 	public void setMarketOpen() {
-		Date date = new Date();
-		long timeNow = date.getTime();
-		
-		DateTimeFormatter dtFormatter = ISODateTimeFormat.dateTime();
-		long lastRefresh = dtFormatter.parseDateTime(this.timestamp).getMillis();
-		
-		System.out.println(timeNow-lastRefresh);
-		
-		this.marketOpen = timeNow-lastRefresh<60000;		
+//		Date date = new Date();
+//		long timeNow = date.getTime();
+//		
+//		DateTimeFormatter dtFormatter = ISODateTimeFormat.dateTime();
+//		long lastRefresh = dtFormatter.parseDateTime(this.timestamp).getMillis();
+//		
+//		System.out.println(timeNow-lastRefresh);
+//		
+//		this.marketOpen = timeNow-lastRefresh<60000;		
+		this.marketOpen=true;
 	}
 	@Override
 	public String toString() {
