@@ -28,6 +28,11 @@ import static utils.Constants.tiingo_token;
 //TODO when going back from search to main page, need to delete/reset session variables of ticker and tickerfavorite
 //TODO no internet connection
 //TODO when you add something to favorite, the first click does nothing
+//TODO navbar formatting
+//TODO checkbox on signup page
+//TODO signup/login page formatting
+//TODO google login/signup
+//TODO check for email malformation
 
 @WebServlet("/Search")
 public class Search extends HttpServlet {

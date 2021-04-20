@@ -63,6 +63,12 @@
 			<text class = "loginSubheader">Confirm Password</text>
 			<br>
 			<input type="text" id ="signUpConfirmPassword" class = "loginTextField" required/>
+			<br>
+			<br>
+			<button  onclick ="signUp()" class = "loginButton" type="button">
+				<img src="login.png" width="20px" height="20px">
+				<text class = "loginButtonText">Create Account</text>
+			</button>
 		</form>
 	</div>
 	
@@ -71,7 +77,7 @@
 	<script>
 		function login(){
 			if(document.getElementById("loginUsername").value=="" || document.getElementById("loginPassword").value==""){
-				alert("Please enter a Username and Password");
+				alert("Login Failed: Please enter a Username and Password");
 				return;
 			}
 			
@@ -85,7 +91,39 @@
 					alert(res.message);
 					if(res.success){
 						sessionStorage.setItem("loggedIn", "true");
-						sessionStorage.setItem("user_id", "true");
+						sessionStorage.setItem("user_id", res.user_id);
+						location.replace("index.html");
+					}
+				}
+			});
+		}
+		
+		function signUp(){
+			//Make sure all fields are filled
+			if(document.getElementById("signUpEmail").value=="" || document.getElementById("signUpUsername").value=="" || document.getElementById("signUpPassword").value=="" || document.getElementById("signUpConfirmPassword").value==""){
+				alert("Signup Failed: Please enter all required fields");
+				return;
+			}
+			
+			//Make sure password matches confirm password
+			if(document.getElementById("signUpConfirmPassword").value != document.getElementById("signUpPassword").value){
+				alert("Signup Failed: Passwords do not match");
+				return;
+			}
+			
+			$.ajax({
+				url:"signup",
+				data: {
+					email: document.getElementById("signUpEmail").value,
+					username: document.getElementById("signUpUsername").value,
+					password: document.getElementById("signUpPassword").value
+				},
+				success: function(res){
+					console.log(res);
+					alert(res.message);
+					if(res.success){
+						sessionStorage.setItem("loggedIn", "true");
+						sessionStorage.setItem("user_id", res.user_id);
 						location.replace("index.html");
 					}
 				}

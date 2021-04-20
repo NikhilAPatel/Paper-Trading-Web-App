@@ -233,6 +233,7 @@ public final class Utils {
 		} catch (SQLException | ClassNotFoundException sqle) {
 			sqle.printStackTrace();
 			System.out.println(sqle.getMessage());
+			return new User(false);
 		} finally {
 			try {
 				if (ps != null) {
@@ -243,6 +244,53 @@ public final class Utils {
 				}
 			} catch (SQLException sqle) {
 				System.out.println(sqle.getMessage());
+				return new User(false);
+			}
+		}
+		return new User(false);
+	}
+	
+	public static final User queryUserByEmail(String email) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs;
+		
+		//Do the actual sell
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(dbAddress);
+
+			//Get all of this user's owned stock of this ticker
+			ps = conn.prepareStatement("select * from User where email=?");
+			ps.setString(1, email);			
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				int user_id = rs.getInt("user_id");
+				String password = rs.getString("password");
+				String username = rs.getString("username");
+				boolean google_user = rs.getBoolean("google_user");
+				float balance = rs.getFloat("balance");
+				
+				User user = new User(user_id, username, password, email, google_user, balance);
+				return user;
+			}
+		} catch (SQLException | ClassNotFoundException sqle) {
+			sqle.printStackTrace();
+			System.out.println(sqle.getMessage());
+			return new User(false);
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				System.out.println(sqle.getMessage());
+				return new User(false);
 			}
 		}
 		return new User(false);
