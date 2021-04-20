@@ -50,6 +50,7 @@ public class Buy extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		
 		//Initialization
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
@@ -62,7 +63,7 @@ public class Buy extends HttpServlet {
 		
 		//Check if the quantity is invalid
 		if(quantity<1) {
-			out.println("{\"success\": false, \"message\": \"FAILED: Purchase not possible\"}"); //TODO lint
+			out.println("{\"success\":˙ false, \"message\": \"FAILED: Purchase not possible\"}"); //TODO lint
 			return;//TODO can you do this in Java
 		}
 		
@@ -74,7 +75,10 @@ public class Buy extends HttpServlet {
 		
 			
 		//Do buy
-		float ask = getStockAttribute("ask");
+		float ask = (float) getStockAttribute(ticker, "ask");
+		if(ask==-1) {
+			out.println("{\"success\": false, \"message\": \"FAILED\"}");
+		}
 		out.println(buy(user_id, ticker, ask, quantity));
 				
 	}
@@ -99,6 +103,8 @@ public class Buy extends HttpServlet {
 		//Calculate the user's new balance
 		float newBalance = balance - (ask*quantity);
 		
+		System.out.println("buying "+ticker+" x"+quantity+" at "+ask);
+		
 		//Do the actual buy
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -118,10 +124,10 @@ public class Buy extends HttpServlet {
 				return "{\"success\": false, \"message\": \"FAILED\"}";//TODO lint and check if this actually happens when it fails
 			}
 			
-			//TODO do update
 			//Update the user's balance
-			ps2 = conn.prepareStatement("");
-			ps2.setInt(1,  user_id);
+			ps2 = conn.prepareStatement("update User set balance = ? where user_id=?");
+			ps2.setFloat(1, newBalance);
+			ps2.setInt(2,  user_id);
 			
 			rs2  = ps2.executeUpdate();
 			

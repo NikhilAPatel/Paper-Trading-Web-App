@@ -3,6 +3,7 @@ package models;
 import static utils.Utils.round;
 import static utils.Utils.marketClosed;
 
+import java.io.IOException;
 import java.time.LocalTime;
 import java.util.Date;
 import org.joda.time.DateTime;
@@ -209,7 +210,7 @@ public class Stock {
 		this.formattedTimestamp=this.timestamp.substring(0, this.timestamp.indexOf("T")+9).replace("T", " ");
 	}
 	
-	public void setMarketOpen() {	
+	public void setMarketOpen() throws IOException {	
 		this.marketOpen=!marketClosed();
 	}
 	@Override

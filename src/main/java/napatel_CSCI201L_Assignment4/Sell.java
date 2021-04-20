@@ -37,7 +37,7 @@ import models.StockMeta;
 //TODO look into SQL date/timestamp types
 //TODO check if quantity box is empty
 
-@WebServlet("/buy")
+@WebServlet("/sell")
 public class Sell extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -77,7 +77,10 @@ public class Sell extends HttpServlet {
 		
 			
 		//Do sell
-		float bid = getStockAttribute("bid");
+		float bid = (float) getStockAttribute(ticker, "bid");
+		if(bid==-1) {
+			out.println("{\"success\": false, \"message\": \"FAILED\"}");
+		}
 		out.println(sell(user_id, ticker, bid, quantity));
 				
 	}

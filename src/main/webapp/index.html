@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>SalStocks</title>
-	<link rel="stylesheet" type="text/css" href="search6.css"/>
+	<link rel="stylesheet" type="text/css" href="search7.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/3500178f9e.js" crossorigin="anonymous"></script>
 	<script>
@@ -60,19 +60,37 @@
 		 				if(result.marketOpen){
 		 					hoursText="<text class=\"greenHours\">Market Open</text>";
 		 					openDetails="\
-								<p class=\"lmid\">Mid Price: "+result.mid+"</p>\
-								<p class=\"laskp\">Ask Price: "+result.askPrice+"</p>\
-								<p class=\"lasks\">Ask Size: "+result.askSize+"</p>\
-								<p class=\"lbidp\">Bid Price: "+result.bidPrice+"</p>\
-								<p class=\"lbids\">Bid Size: "+result.bidSize+"</p>\
+		 						<text class=\"lhigh\">High Price: "+result.high+"</text>\
+		 						<text class=\"lmid\">Mid Price: "+result.mid+"</text>\
+		 						<br>\
+		 						<text class=\"lhigh\">Low Price: "+result.low+"</text>\
+		 						<text class=\"lmid\">Ask Price: "+result.askPrice+"</text>\
+		 						<br>\
+		 						<text class=\"lhigh\">Open Price: "+result.open+"</text>\
+		 						<text class=\"lmid\">Ask Size: "+result.askSize+"</text>\
+		 						<br>\
+		 						<text class=\"lhigh\">Prev. Close: "+result.prevClose+"</text>\
+		 						<text class=\"lmid\">Bid Price: "+result.bidPrice+"</text>\
+		 						<br>\
+		 						<text class=\"lhigh\">Volume: "+result.volume+"</text>\
+		 						<text class=\"lmid\">Bid Size: "+result.bidSize+"</text>\
 								";
+		 				}else{
+		 					openDetails="\
+		 						<text class=\"lhigh\">High Price: "+result.high+"</text>\
+		 						<br>\
+		 						<text class=\"lhigh\">Low Price: "+result.low+"</text>\
+		 						<br>\
+		 						<text class=\"lhigh\">Open Price: "+result.open+"</text>\
+		 						<br>\
+		 						<text class=\"lhigh\">Prev. Close: "+result.prevClose+"</text>\
+		 						<br>\
+		 						<text class=\"lhigh\">Volume: "+result.volume+"</text>\
+		 						";
 		 				}
 		 				
 		 				//Sets the session storage variable of if this ticker is already a favorite and updates the image
 						isFavorite(sessionStorage.getItem("ticker"));
-		 				
-		 				
-		 				
 		 				
 		 				
 		 				$(homeDiv).html("\
@@ -107,11 +125,6 @@
 		 						<hr class = \"lineDivide\">\
 		 						<br>\
 		 						<br>\
-		 						<text class=\"lhigh\">High Price: "+result.high+"</text>\
-		 						<text class=\"llow\">Low Price: "+result.low+"</text>\
-		 						<text class=\"lopen\">Open Price: "+result.open+"</text>\
-		 						<p class=\"lclose\">Prev. Close: "+result.prevClose+"</p>\
-		 						<p class=\"lvolume\">Volume: "+result.volume+"</p>\
 		 						"+openDetails+ "<br>\
 		 						<br>\
 		 						<p class=\"descriptionTitle\"><b>Company's Description</b></p>\
@@ -172,6 +185,17 @@
 		
 		function buy(){
 			console.log("buying "+ document.getElementById("buyField").value);
+			$.ajax({
+				url:"buy",
+				data:{
+					ticker: sessionStorage.getItem("ticker"),
+					quantity: document.getElementById("buyField").value,
+					user_id: sessionStorage.getItem("user_id")
+				},
+				success: function(res){
+					alert(res.message);
+				}
+			})
 		}
 		
 		function isFavorite(ticker){
