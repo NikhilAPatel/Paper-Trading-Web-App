@@ -9,7 +9,7 @@
 <body>
 	<header class="site-header">
 	  <a href="login.html" onclick="goLogin()" class="homeButton border" id="loginPageButton">Login/Sign Up</a>
-	  <a href="index.html" onclick="goHome()" class="homeButton" id="homeButton">Home/Search</a>
+	  <a href="index.html" class="homeButton" id="homeButton">Home/Search</a>
 	  <a class = "logo" onclick="goHome()" href="index.html">SalStocks</a>
 	</header>
 	
@@ -84,7 +84,6 @@
 				success: function(res){
 					alert(res.message);
 					if(res.success){
-						console.log("redirec");
 						sessionStorage.setItem("loggedIn", "true");
 						sessionStorage.setItem("user_id", "true");
 						location.replace("index.html");

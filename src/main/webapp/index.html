@@ -276,25 +276,12 @@
 		
 		function goHome(){
 			console.log("going home");
-			//TODO reset session storage but not logout user
-		}
-		
-		function goLogin(){
-			//TODO
-			sessionStorage.setItem("loggedIn", "true");
-			console.log("button to go login clicked");
-			sessionStorage.setItem("user_id", "1");
+			//TODO reset session storage variables pertaining to search
 		}
 		
 		function goPortfolio(){
 			//TODO
 			console.log("button to go portfolio clicked");
-		}
-		
-		function goLogout(){
-			//TODO
-			//Go home and reset everything in session storage
-			console.log("button to go logout clicked");
 		}
 		
 		function goLogout(){
@@ -361,7 +348,7 @@
 	            	";
             }else{
             	document.getElementById("site-header").innerHTML = "\
-                	<a href=\"login.html\" onclick=\"goLogin()\" class=\"homeButton\" id=\"loginPageButton\">Login/Sign Up</a>\
+                	<a href=\"login.html\" class=\"homeButton\" id=\"loginPageButton\">Login/Sign Up</a>\
                 	<a href=\"index.html\" onclick=\"goHome()\" class=\"homeButton border\" id=\"homeButton\">Home/Search</a>\
                 	<a class = \"logo\" onclick=\"goHome()\" href=\"index.html\">SalStocks</a>\
                 	<input type=\"button\" onclick=\"pss()\" value=\"print\"/>\
