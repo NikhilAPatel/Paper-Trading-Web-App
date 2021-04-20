@@ -35,7 +35,6 @@ public class RemoveFavorite extends HttpServlet {
 	}
 
 	public void init(ServletConfig config) throws ServletException {
-		System.out.println("in init");
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

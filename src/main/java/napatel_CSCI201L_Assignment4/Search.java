@@ -25,9 +25,9 @@ import static utils.Constants.tiingo_token;
 //General todos
 //TODO maybe the close value on logged out search needs to be prevClose
 //TODO if addFavorite does fail for some reason, the button never illuminates (which is good), but there is also no error message. I think it is because somehow the ajax callback is never run
-//TODO i don't think measuring time between last refresh and current time actually tells you if the market is closed or not
 //TODO when going back from search to main page, need to delete/reset session variables of ticker and tickerfavorite
 //TODO no internet connection
+//TODO when you add something to favorite, the first click does nothing
 
 @WebServlet("/Search")
 public class Search extends HttpServlet {
@@ -35,11 +35,9 @@ public class Search extends HttpServlet {
 
 	public Search() {
 		super();
-		System.out.println("in constructor");
 	}
 
 	public void init(ServletConfig config) throws ServletException {
-		System.out.println("in init");
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -64,7 +62,7 @@ public class Search extends HttpServlet {
 
 		// Case when ticker does not exist
 		if (con.getResponseCode() == 404) {
-			System.out.println(ticker + " does not exist. All involved trades will be purged.");
+			System.out.println(ticker + " 218937892does not exist. All involved trades will be purged.");
 			return "{\"error\": \"true\", \"errorMessage\":\"Ticker " + ticker.toUpperCase() + " does not exist\"}";
 		} else {
 			try {
@@ -79,7 +77,8 @@ public class Search extends HttpServlet {
 				Stock stock = gson.fromJson(String.valueOf(response).replace("[", "").replace("]", ""), Stock.class);
 				return getAllStockDetails(stock, response.toString());
 			} catch (Exception e) {
-				System.out.println(ticker + " does not exist. All involved trades will be purged.");
+				e.printStackTrace();
+				System.out.println(ticker + " 2837219873does not exist. All involved trades will be purged.");
 				return "{\"error\": \"true\", \"errorMessage\":\"Ticker " + ticker.toUpperCase() + " does not exist\"}";
 			}
 		}
@@ -96,7 +95,7 @@ public class Search extends HttpServlet {
 
 		// Case when ticker does not exist
 		if (con.getResponseCode() == 404) {
-			System.out.println(stock.getTicker() + " does not exist. All involved trades will be purged.");
+			System.out.println(stock.getTicker() + " 128937928173does not exist. All involved trades will be purged.");
 			return "{\"error\": \"true\", \"errorMessage\":\"Ticker " + stock.getTicker().toUpperCase()
 					+ " does not exist\"}";
 		} else {
@@ -110,7 +109,7 @@ public class Search extends HttpServlet {
 				}
 				stockmeta = gson.fromJson(String.valueOf(response).replace("[", "").replace("]", ""), StockMeta.class);
 			} catch (Exception e) {
-				System.out.println(stock.getTicker() + "  does not exist. All involved trades will be purged.");
+				System.out.println(stock.getTicker() + "  2987389217does not exist. All involved trades will be purged.");
 				return "{\"error\": \"true\", \"errorMessage\":\"Ticker " + stock.getTicker().toUpperCase()
 						+ " does not exist\"}";
 			}

@@ -273,3 +273,20 @@
   	height: auto;
 }
 
+.lhigh{
+	position: relative;
+	text-align: left;
+	float:left;
+	font-size: 10pt;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.lmid{
+	position: relative;
+	text-align: right;
+	float:right;
+	font-size: 10pt;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+
