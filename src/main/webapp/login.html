@@ -12,4 +12,91 @@
 	  <a href="index.html" onclick="goHome()" class="homeButton" id="homeButton">Home/Search</a>
 	  <a class = "logo" onclick="goHome()" href="index.html">SalStocks</a>
 	</header>
+	
+	<br>
+	<br>
+	<br>
+	
+	<div class="loginLeft">
+		<text class = "loginHeader">Login</text>
+		<br>
+		<br>
+		<form id="loginForm">
+			<text class = "loginSubheader">Username</text>
+			<br>
+			<input type="text" id ="loginUsername" class = "loginTextField" required/>
+			<br>
+			<br>
+			<text class = "loginSubheader">Password</text>
+			<br>
+			<input type="text" id ="loginPassword" class = "loginTextField" required/>
+			<br>
+			<br>
+			<button  onclick ="login()" class = "loginButton" type="button">
+				<img src="login.png" width="20px" height="20px">
+				<text class = "loginButtonText">Login</text>
+			</button>
+			
+		</form>
+	</div>
+	
+	<div class="loginRight">
+		<text class = "loginHeader">Sign Up</text>
+		<br>
+		<br>
+		<form id="signUpHeader">
+			<text class = "loginSubheader">Email</text>
+			<br>
+			<input type="text" id ="signUpEmail" class = "loginTextField" required/>
+			<br>
+			<br>
+			<text class = "loginSubheader">Username</text>
+			<br>
+			<input type="text" id ="signUpUsername" class = "loginTextField" required/>
+			<br>
+			<br>
+			<text class = "loginSubheader">Password</text>
+			<br>
+			<input type="text" id ="signUpPassword" class = "loginTextField" required/>
+			<br>
+			<br>
+			<text class = "loginSubheader">Confirm Password</text>
+			<br>
+			<input type="text" id ="signUpConfirmPassword" class = "loginTextField" required/>
+		</form>
+	</div>
+	
+	
+	
+	<script>
+		function login(){
+			if(document.getElementById("loginUsername").value=="" || document.getElementById("loginPassword").value==""){
+				alert("Please enter a Username and Password");
+				return;
+			}
+			
+			$.ajax({
+				url:"login",
+				data: {
+					username: document.getElementById("loginUsername").value,
+					password: document.getElementById("loginPassword").value
+				},
+				success: function(res){
+					alert(res.message);
+					if(res.success){
+						console.log("redirec");
+						sessionStorage.setItem("loggedIn", "true");
+						sessionStorage.setItem("user_id", "true");
+						location.replace("index.html");
+					}
+				}
+			});
+		}
+	
+	</script>
+	
 
+	
+	
+</body>
+</html>
