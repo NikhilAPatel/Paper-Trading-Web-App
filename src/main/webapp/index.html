@@ -28,6 +28,7 @@
 		 			query: document.searchForm.searchField.value
 		 		},
 		 		success: function(result){
+		 			document.getElementById("homeButton").classList.remove("border");
 		 			if(result.hasOwnProperty('error')){
 			 			$(errorDiv).html("<h2>"+result.errorMessage+"<\h2>");
 		 			}else{//Display the stock data
@@ -149,7 +150,7 @@
 		 			if(result.hasOwnProperty('error')){
 			 			$(errorDiv).html("<h2>"+result.errorMessage+"<\h2>");
 		 			}else{//Display the stock data
-		 				console.log(result)
+		 				document.getElementById("homeButton").classList.remove("border");
 		 				$(homeDiv).html("\
 		 						<div class=\"info\">\
 		 						<p class=\"ticker\">"+result.ticker+"</p>\
@@ -336,7 +337,7 @@
         
         window.onload = function () {
             if (sessionStorage.getItem("hasCodeRunBefore") === null) {
-            	sessionStorage.setItem("loggedIn", "true");//TODO change back to false
+            	sessionStorage.setItem("loggedIn", "false");//TODO change back to false
             	sessionStorage.setItem("user_id", "1");//TODO delete this and do it only when the user is successfully logged in
             	sessionStorage.setItem("hasCodeRunBefore", true);
             }
