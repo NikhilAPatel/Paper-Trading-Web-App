@@ -302,6 +302,10 @@
 			//Go home and reset everything in session storage
 			sessionStorage.clear();
 		}
+		
+		function pss(){//TODO dele
+			console.log(Object.keys(sessionStorage));
+		}
 	 
 	 
 	 
@@ -352,12 +356,14 @@
 	            	<a href=\"favorites.html\" onclick=\"goFavorites()\" class=\"homeButton\" id=\"favoriteButton\">Favorites</a>\
 	            	<a href=\"index.html\" onclick=\"goHome()\" class=\"homeButton border\" id=\"homeButton\">Home/Search</a>\
 	            	<a class = \"logo\" onclick=\"goHome()\" href=\"index.html\">SalStocks</a>\
+	            	<input type=\"button\" onclick=\"pss()\" value=\"print\"/>\
 	            	";
             }else{
             	document.getElementById("site-header").innerHTML = "\
                 	<a href=\"login.html\" onclick=\"goLogin()\" class=\"homeButton\" id=\"loginPageButton\">Login/Sign Up</a>\
                 	<a href=\"index.html\" onclick=\"goHome()\" class=\"homeButton border\" id=\"homeButton\">Home/Search</a>\
                 	<a class = \"logo\" onclick=\"goHome()\" href=\"index.html\">SalStocks</a>\
+                	<input type=\"button\" onclick=\"pss()\" value=\"print\"/>\
                 	";
             }
         }
