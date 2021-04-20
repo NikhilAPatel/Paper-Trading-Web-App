@@ -322,3 +322,7 @@
 	margin-top:2px;
   	border: 1px solid #FFFFFF;
 }
+
+.hidden{
+	visibility: hidden;
+}

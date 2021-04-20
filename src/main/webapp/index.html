@@ -294,6 +294,12 @@
 			//Go home and reset everything in session storage
 			console.log("button to go logout clicked");
 		}
+		
+		function goLogout(){
+			//TODO
+			//Go home and reset everything in session storage
+			console.log("button to favorites clicked");
+		}
 	 
 	 
 	 
@@ -301,11 +307,7 @@
 </head>
 <body>
 
-	<header class="site-header">
-	  <a href="index.html" onclick="goLogout()" class="homeButton" id="logoutButton">Logout</a>
-	  <a href="portfolio.html" onclick="goPortfolio()" class="homeButton"id="portfolioPageButton">Portfolio</a>
-	  <a href="login.html" onclick="goLogin()" class="homeButton" id="loginPageButton">Login/Sign Up</a>
-	  <a href="index.html" onclick="goHome()" class="homeButton border" id="homeButton">Home/Search</a>
+	<header id = "site-header" class="site-header">
 	  <a class = "logo" onclick="goHome()" href="index.html">SalStocks</a>
 	</header>
 
@@ -337,9 +339,24 @@
         
         window.onload = function () {
             if (sessionStorage.getItem("hasCodeRunBefore") === null) {
-            	sessionStorage.setItem("loggedIn", "false");//TODO change back to false
+            	sessionStorage.setItem("loggedIn", "true");//TODO change back to false
             	sessionStorage.setItem("user_id", "1");//TODO delete this and do it only when the user is successfully logged in
             	sessionStorage.setItem("hasCodeRunBefore", true);
+            }
+            if(sessionStorage.getItem("loggedIn")==="true"){
+            	document.getElementById("site-header").innerHTML = "\
+	            	<a href=\"index.html\" onclick=\"goLogout()\" class=\"homeButton\" id=\"logoutButton\">Logout</a>\
+	            	<a href=\"portfolio.html\" onclick=\"goPortfolio()\" class=\"homeButton\" id=\"portfolioPageButton\">Portfolio</a>\
+	            	<a href=\"favorites.html\" onclick=\"goFavorites()\" class=\"homeButton\" id=\"favoriteButton\">Favorites</a>\
+	            	<a href=\"index.html\" onclick=\"goHome()\" class=\"homeButton border\" id=\"homeButton\">Home/Search</a>\
+	            	<a class = \"logo\" onclick=\"goHome()\" href=\"index.html\">SalStocks</a>\
+	            	";
+            }else{
+            	document.getElementById("site-header").innerHTML = "\
+                	<a href=\"login.html\" onclick=\"goLogin()\" class=\"homeButton\" id=\"loginPageButton\">Login/Sign Up</a>\
+                	<a href=\"index.html\" onclick=\"goHome()\" class=\"homeButton border\" id=\"homeButton\">Home/Search</a>\
+                	<a class = \"logo\" onclick=\"goHome()\" href=\"index.html\">SalStocks</a>\
+                	";
             }
         }
     </script> 
