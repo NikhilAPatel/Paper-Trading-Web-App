@@ -281,7 +281,9 @@
 		
 		function goLogin(){
 			//TODO
+			sessionStorage.setItem("loggedIn", "true");
 			console.log("button to go login clicked");
+			sessionStorage.setItem("user_id", "1");
 		}
 		
 		function goPortfolio(){
@@ -298,7 +300,7 @@
 		function goLogout(){
 			//TODO
 			//Go home and reset everything in session storage
-			console.log("button to favorites clicked");
+			sessionStorage.clear();
 		}
 	 
 	 
@@ -338,11 +340,11 @@
         });
         
         window.onload = function () {
-            if (sessionStorage.getItem("hasCodeRunBefore") === null) {
+            /* if (sessionStorage.getItem("hasCodeRunBefore") === null) {
             	sessionStorage.setItem("loggedIn", "true");//TODO change back to false
             	sessionStorage.setItem("user_id", "1");//TODO delete this and do it only when the user is successfully logged in
             	sessionStorage.setItem("hasCodeRunBefore", true);
-            }
+            } */
             if(sessionStorage.getItem("loggedIn")==="true"){
             	document.getElementById("site-header").innerHTML = "\
 	            	<a href=\"index.html\" onclick=\"goLogout()\" class=\"homeButton\" id=\"logoutButton\">Logout</a>\
