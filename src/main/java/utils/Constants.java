@@ -5,4 +5,5 @@ public final class Constants {
 	public static final String dbAddress = "jdbc:mysql://localhost/SalStocks?user=root&password=Abb0nDanz@";
 	public static final int market_open = 390;
 	public static final int market_close = 780;
+	public static final String google_client_id = "228223616702-qu7s6guoulbl4s4dfmin3cu7l1ntj4d7.apps.googleusercontent.com";
 }
