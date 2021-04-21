@@ -39,7 +39,6 @@ public class Buy extends HttpServlet {
 		super();
 	}
 	
-	//TODO check if quantity box is empty
 
 	public void init(ServletConfig config) throws ServletException {
 	}
@@ -62,19 +61,21 @@ public class Buy extends HttpServlet {
 		
 		//Check if the quantity is invalid
 		if(quantity<1) {
-			out.println("{\"success\":˙ false, \"message\": \"FAILED: Purchase not possible\"}"); //TODO lint
-			return;//TODO can you do this in Java
+			out.println("{\"success\":˙ false, \"message\": \"FAILED: Purchase not possible\"}");
+			return;
 		}
 		//TODO uncomment
 //		//Return error if the market is closed
 //		if(marketClosed()) {
-//			out.println("{\"success\": false, \"message\": \"FAILED: Market is closed\"}"); //TODO lint
-//			return;//TODO can you do this in Java
+//			out.println("{\"success\": false, \"message\": \"FAILED: Market is closed\"}");
+//			return;
 //		}
 		
 			
 		//Do buy
-		float ask = (float) getStockAttribute(ticker, "ask");
+		//TODO uncomment
+		//float ask = (float) getStockAttribute(ticker, "ask");
+		float ask = 100;
 		if(ask==-1) {
 			out.println("{\"success\": false, \"message\": \"FAILED\"}");
 		}
@@ -96,7 +97,7 @@ public class Buy extends HttpServlet {
 		//Checks if user has enough funds to execute purchase
 		boolean canBuy = balance>=ask*quantity;
 		if(!canBuy) {//failed
-			return "{\"success\": false, \"message\": \"FAILED: Insufficient Balance\"}";//TODO lint
+			return "{\"success\": false, \"message\": \"FAILED: Insufficient Balance\"}";
 		}
 		
 		//Calculate the user's new balance

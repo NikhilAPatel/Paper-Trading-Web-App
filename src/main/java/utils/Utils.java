@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.tomcat.jni.Time;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
@@ -149,11 +150,11 @@ public final class Utils {
 		return true;
 		
 	}
-	//TODO also look into making a method that returns an actual Date timestamp or something
+	
+	//Returns current time in millis, which can be reinterpreted as a Calendar by using cal= Calendar.getInstance then cal.setTimeInMillis(number) 
 	public static final String getTimestamp() {
-		//TODO
-		
-		return "";
+		Calendar cal = Calendar.getInstance();	
+		return Long.toString(cal.getTimeInMillis());
 	}
 	
 	public static final ArrayList<OwnedStock> getOwnedStock(int user_id, String ticker){
