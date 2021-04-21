@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import static utils.Utils.getUserBalance;
 import static utils.Utils.marketClosed;
 import static utils.Utils.getTimestamp;
 import static utils.Utils.round;
+import static utils.Utils.getOwnedStock;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -28,6 +30,7 @@ import java.net.HttpURLConnection;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import models.OwnedStock;
 import models.Stock;
 import models.StockMeta;
 

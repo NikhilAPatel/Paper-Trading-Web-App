@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 import org.apache.tomcat.jni.Time;
@@ -178,11 +179,11 @@ public final class Utils {
 			
 			while(rs.next()) {
 				int os_id = rs.getInt("os_id");
-				int local_user_id = rs.getInt("os_id");
-				int stock_id = rs.getInt("os_id");
-				int local_quantity = rs.getInt("os_id");
-				float purchase_price = rs.getFloat("os_id");
-				String timestamp = rs.getString("os_id");
+				int local_user_id = rs.getInt("user_id");
+				int stock_id = rs.getInt("stock_id");
+				int local_quantity = rs.getInt("quantity");
+				float purchase_price = rs.getFloat("purchase_price");
+				String timestamp = rs.getString("timestamp");
 				results.add(new OwnedStock(os_id, local_user_id, stock_id, local_quantity, purchase_price, timestamp));
 			}
 			
@@ -202,7 +203,7 @@ public final class Utils {
 				System.out.println(sqle.getMessage());
 			}
 		}
-		
+		Collections.sort(results);
 		return results;
 	}
 	
@@ -377,5 +378,5 @@ public final class Utils {
 			}
 		}
 		return new_id;
-	}
+	}	
 }
