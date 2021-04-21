@@ -5,6 +5,8 @@
 <title>SalStocks</title>
 	<link rel="stylesheet" type="text/css" href="search8.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="228223616702-qu7s6guoulbl4s4dfmin3cu7l1ntj4d7.apps.googleusercontent.com">
 </head>
 <body>
 	<header class="site-header">
@@ -36,6 +38,10 @@
 				<img src="login.png" width="20px" height="20px">
 				<text class = "loginButtonText">Login</text>
 			</button>
+			<br>
+			<br>
+			<div class="g-signin2" data-onsuccess="onSignIn"></div>
+			
 			
 		</form>
 	</div>
@@ -128,6 +134,30 @@
 					}
 				}
 			});
+		}
+		
+		function onSignIn(googleUser) {
+			console.log("Signin");
+			var profile = googleUser.getBasicProfile();
+			var id_token = googleUser.getAuthResponse().id_token;
+			var email = profile.getEmail();
+			$.ajax({
+				url:"GoogleLogin",
+				data: {
+					email:email,
+					id_token:id_token
+				},
+				success: function(res){
+					console.log(res);
+					alert(res.message);
+					if(res.success){
+						sessionStorage.setItem("loggedIn", "true");
+						sessionStorage.setItem("user_id", res.user_id);
+						location.replace("index.html");
+					}				
+				}
+			});
+			  
 		}
 	
 	</script>
