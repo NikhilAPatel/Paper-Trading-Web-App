@@ -15,6 +15,8 @@
 	  <a class = "logo" onclick="goHome()" href="index.html">SalStocks</a>
 	</header>
 	
+	<div id="favoritesDiv"></div>
+	
 	
 	<script>
 		window.onload = function () {
@@ -24,9 +26,12 @@
 	    			user_id:sessionStorage.getItem("user_id")
 	    		},
 	    		success: function(res){
-	    			console.log(res);
 	    			if(res.error){
 	    				alert("Currently you don't have any stock in your favorites.")
+	    			}else{
+	    				for(i=0; i<res.length; i++){
+	    					console.log(res[i]);
+	    				}
 	    			}
 	    		}
 	    	});
