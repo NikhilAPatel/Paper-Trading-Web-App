@@ -27,11 +27,10 @@ import static utils.Constants.tiingo_token;
 //TODO if addFavorite does fail for some reason, the button never illuminates (which is good), but there is also no error message. I think it is because somehow the ajax callback is never run
 //TODO when going back from search to main page, need to delete/reset session variables of ticker and tickerfavorite
 //TODO no internet connection
-//TODO when you add something to favorite, the first click does nothing
 //TODO navbar formatting
 //TODO checkbox on signup page
 //TODO signup/login page formatting
-//TODO if either last price or bid price is 0 during market open, use the last price
+//TODO test if either last price or bid price is 0 during market open, use the last price
 
 @WebServlet("/Search")
 public class Search extends HttpServlet {

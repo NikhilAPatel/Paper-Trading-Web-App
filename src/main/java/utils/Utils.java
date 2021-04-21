@@ -72,6 +72,8 @@ public final class Utils {
 						return stock.getBidPrice();
 					case "timestamp":
 						return stock.getTimestamp();
+					case "last":
+						return stock.getLast();
 					default:
 						break;
 				}

@@ -15,11 +15,16 @@
 	  <a class = "logo" onclick="goHome()" href="index.html">SalStocks</a>
 	</header>
 	
+	<br/>
+	<br/>
+	<br/>
+	
 	<div id="favoritesDiv"></div>
 	
 	
 	<script>
 		window.onload = function () {
+			var innerCode="";
 	    	$.ajax({
 	    		url:"GetFavorites",
 	    		data:{
@@ -30,9 +35,38 @@
 	    				alert("Currently you don't have any stock in your favorites.")
 	    			}else{
 	    				for(i=0; i<res.length; i++){
+	    					var lastStyle="";
+			 				var percentStyle="";
+			 				var caretSrc="";
+	    					
+			 				if(res[i].percentChange>=0){
+			 					lastStyle = "greenLast";
+			 					percentStyle = "greenPercent";
+			 					caretSrc="caret-up.png";
+			 				}else{
+			 					lastStyle = "redLast"
+			 					percentStyle = "redPercent";
+			 					caretSrc="caret-down.png";
+			 				}
+	    					
+	    					
 	    					console.log(res[i]);
+	    					
+	    					innerCode+= "\
+	    					<div id = \"fav"+i+"\" style=\"border-style:solid\">\
+	    					<text class=\"favTicker\">"+res[i].ticker+"</text>\
+	    					<text class=\"favName\">"+res[i].name+"</text>\
+	    					<text class=\""+lastStyle+"\">"+res[i].last+"</text>\
+	    					<text class=\""+percentStyle+"\">"+res[i].change+" ("+res[i].percentChange+")%</text>\
+	 						<img src=\""+caretSrc+"\" class=\"caret\"\>\
+	    					\
+	    					</div>\
+	    					<br/>\
+	    					<br/>\
+	    					"
 	    				}
 	    			}
+	    			document.getElementById("favoritesDiv").innerHTML=innerCode;
 	    		}
 	    	});
 	    }

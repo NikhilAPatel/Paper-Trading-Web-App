@@ -80,6 +80,8 @@ public class Sell extends HttpServlet {
 		float bid = (float) getStockAttribute(ticker, "bid");
 		if(bid==-1) {
 			out.println("{\"success\": false, \"message\": \"FAILED\"}");
+		}else if(bid==0) {
+			bid = (float) getStockAttribute(ticker, "last");
 		}
 		out.println(sell(user_id, ticker, bid, quantity));
 				
