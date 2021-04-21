@@ -366,3 +366,16 @@
 .loginButtonText{
 	padding-bottom: 10px;
 }
+.space{
+	padding-right: 30px;
+}
+.favTicker{
+	font-size: 24px;
+}
+
+.closeFormat{
+	position: relative;
+	float:right;
+	padding-left: 20px;
+	width:20px;
+}
