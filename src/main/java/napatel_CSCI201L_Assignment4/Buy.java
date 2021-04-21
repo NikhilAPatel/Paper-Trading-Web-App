@@ -67,18 +67,15 @@ public class Buy extends HttpServlet {
 			out.println("{\"success\":˙ false, \"message\": \"FAILED: Purchase not possible\"}");
 			return;
 		}
-		//TODO uncomment
-//		//Return error if the market is closed
-//		if(marketClosed()) {
-//			out.println("{\"success\": false, \"message\": \"FAILED: Market is closed\"}");
-//			return;
-//		}
+		//Return error if the market is closed
+		if(marketClosed()) {
+			out.println("{\"success\": false, \"message\": \"FAILED: Market is closed\"}");
+			return;
+		}
 		
 			
 		//Do buy
-		//TODO uncomment
-		//float ask = (float) getStockAttribute(ticker, "ask");
-		float ask = 100;
+		float ask = (float) getStockAttribute(ticker, "ask");
 		if(ask==-1) {
 			out.println("{\"success\": false, \"message\": \"FAILED\"}");
 		}
