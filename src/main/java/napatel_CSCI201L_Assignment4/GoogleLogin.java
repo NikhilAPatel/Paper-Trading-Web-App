@@ -25,6 +25,8 @@ import models.User;
 import static utils.Constants.tiingo_token;
 import static utils.Utils.queryUser;
 import static utils.Constants.google_client_id;
+import static utils.Utils.queryUserByEmail;
+import static utils.Utils.addUser;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
@@ -52,7 +54,6 @@ public class GoogleLogin extends HttpServlet {
 		String email = request.getParameter("email");
 		String id_token = request.getParameter("id_token");
 		
-		System.out.println("google login server");
 		
 		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
 		    // Specify the CLIENT_ID of the app that accesses the backend:
@@ -72,26 +73,37 @@ public class GoogleLogin extends HttpServlet {
 		}
 		if (idToken != null) {
 		  Payload payload = idToken.getPayload();
-
-		  // Print user identifier
 		  String userId = payload.getSubject();
-		  System.out.println("User ID: " + userId);
 
-		  // Get profile information from payload
-		  boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-		  String name = (String) payload.get("name");
-		  String pictureUrl = (String) payload.get("picture");
-		  String locale = (String) payload.get("locale");
-		  String familyName = (String) payload.get("family_name");
-		  String givenName = (String) payload.get("given_name");
-		  
-		  System.out.println("validated");
-
-		  // Use or store profile information
-		  // ...
-
+		  out.println(googleSSO(email, userId));
+		  return;
 		} else {
 		  System.out.println("Invalid ID token.");
+		  out.println("\"success\":false, \"message\":\"Google SSO Failed\"}");
 		}
+		out.println("\"success\":false, \"message\":\"Google SSO Failed\"}");
+	}
+	
+	//Accepts the validated email and id_token and either signs up the user or fails and returns JSON data
+	public static String googleSSO(String email, String id_token) {
+		//Get the User info associated with the email
+		User user = queryUserByEmail(email);
+		System.out.println(user);
+		
+		//If the userid is -1, then they do not exist and we can sign them up
+		if(user.getUser_id()==-1) {
+			System.out.println("Signing up Google User");
+			int new_id = addUser(email, id_token);
+			return "{\"success\":true, \"message\":\"Signup Success\", \"user_id\":"+new_id+"}";
+		}
+		
+		//If the code is here, then the user is in the database already. First, check if they are a google user
+		if(!user.isGoogle_user()) {
+			return "{\"success\":false, \"message\":\"Google SSO Failed: You have already registered without Google\"}";
+		}
+		
+		//If the code is here, then the user has successfully logged in
+		return "\"success\":true, \"message\":\"Login Success\", \"id_token\":"+user.getUser_id()+"}";
+		
 	}
 }

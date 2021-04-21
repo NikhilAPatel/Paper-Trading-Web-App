@@ -29,6 +29,7 @@ import static utils.Constants.dbAddress;
 import static utils.Constants.tiingo_token;
 import static utils.Utils.queryUser;
 import static utils.Utils.queryUserByEmail;
+import static utils.Utils.addUser;
 
 @WebServlet("/signup")
 public class SignUp extends HttpServlet {
@@ -74,46 +75,5 @@ public class SignUp extends HttpServlet {
 		}
 		
 		
-	}
-	
-	public int addUser(String username, String email, String password) {
-		//Initialization
-		Connection conn = null;
-		PreparedStatement ps = null;
-		int rs;
-		int new_id = -1;
-		
-		//Do the actual sell
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection(dbAddress);
-
-			//Get all of this user's owned stock of this ticker
-			ps = conn.prepareStatement("insert into User (username, password, email, google_user, balance) values (?,?,?,0,50000)");
-			ps.setString(1, username);
-			ps.setString(2, password);
-			ps.setString(3, email);
-			
-			rs = ps.executeUpdate();
-			
-			User user = queryUser(username);
-			new_id = user.getUser_id();
-			
-		} catch (SQLException | ClassNotFoundException sqle) {
-			sqle.printStackTrace();
-			System.out.println(sqle.getMessage());
-		} finally {
-			try {
-				if (ps != null) {
-					ps.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException sqle) {
-				System.out.println(sqle.getMessage());
-			}
-		}
-		return new_id;
 	}
 }
