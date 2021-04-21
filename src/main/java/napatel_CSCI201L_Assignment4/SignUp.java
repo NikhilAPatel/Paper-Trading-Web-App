@@ -52,8 +52,25 @@ public class SignUp extends HttpServlet {
 		String password = request.getParameter("password");
 		String email = request.getParameter("email");
 		
-		//Make sure that no user with the same username exists
+		//Get user data associated with the username
 		User user = queryUser(username);
+		
+		//Get the user data associated with the email
+		User email_user = queryUserByEmail(email);
+		
+		//Make sure that this user is not a google user
+		if(user.isGoogle_user()||email_user.isGoogle_user()) {
+			out.println("{\"success\":false, \"message\":\"Signup Failed: Account has already registered with Google\"}");
+			return;
+		}
+		
+		//Make sure that no user with the same email exists
+		if(email_user.getUser_id()!=-1) {
+			out.println("{\"success\":false, \"message\":\"Signup Failed: Account with username already exists\"}");
+			return;
+		}
+		
+		//Make sure that no user with the same username exists
 		if(user.getUser_id()!=-1) {
 			out.println("{\"success\":false, \"message\":\"Signup Failed: Account with username already exists\"}");
 			return;

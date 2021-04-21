@@ -31,7 +31,7 @@
 			<br>
 			<text class = "loginSubheader">Password</text>
 			<br>
-			<input type="text" id ="loginPassword" class = "loginTextField" required/>
+			<input type="password" id ="loginPassword" class = "loginTextField" required/>
 			<br>
 			<br>
 			<button  onclick ="login()" class = "loginButton" type="button">
@@ -63,12 +63,12 @@
 			<br>
 			<text class = "loginSubheader">Password</text>
 			<br>
-			<input type="text" id ="signUpPassword" class = "loginTextField" required/>
+			<input type="password" id ="signUpPassword" class = "loginTextField" required/>
 			<br>
 			<br>
 			<text class = "loginSubheader">Confirm Password</text>
 			<br>
-			<input type="text" id ="signUpConfirmPassword" class = "loginTextField" required/>
+			<input type="password" id ="signUpConfirmPassword" class = "loginTextField" required/>
 			<br>
 			<br>
 			<button  onclick ="signUp()" class = "loginButton" type="button">
@@ -117,6 +117,12 @@
 				return;
 			}
 			
+			//Make sure that the email is not malformed
+			if(!validateEmail(document.getElementById("signUpEmail").value)){
+				alert("Signup Failed: Email is malformed");
+				return;
+			}
+			
 			$.ajax({
 				url:"signup",
 				data: {
@@ -160,6 +166,11 @@
 				}
 			});
 			  
+		}
+		
+		function validateEmail(email) {
+			const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return re.test(email);
 		}
 
 	
