@@ -39,7 +39,6 @@ public class Buy extends HttpServlet {
 		super();
 	}
 	
-	//TODO look into SQL date/timestamp types
 	//TODO check if quantity box is empty
 
 	public void init(ServletConfig config) throws ServletException {
@@ -66,12 +65,12 @@ public class Buy extends HttpServlet {
 			out.println("{\"success\":˙ false, \"message\": \"FAILED: Purchase not possible\"}"); //TODO lint
 			return;//TODO can you do this in Java
 		}
-		
-		//Return error if the market is closed
-		if(marketClosed()) {
-			out.println("{\"success\": false, \"message\": \"FAILED: Market is closed\"}"); //TODO lint
-			return;//TODO can you do this in Java
-		}
+		//TODO uncomment
+//		//Return error if the market is closed
+//		if(marketClosed()) {
+//			out.println("{\"success\": false, \"message\": \"FAILED: Market is closed\"}"); //TODO lint
+//			return;//TODO can you do this in Java
+//		}
 		
 			
 		//Do buy
@@ -121,7 +120,7 @@ public class Buy extends HttpServlet {
 			rs = ps.executeUpdate();
 			
 			if(rs==0) {//It probably failed
-				return "{\"success\": false, \"message\": \"FAILED\"}";//TODO lint and check if this actually happens when it fails
+				return "{\"success\": false, \"message\": \"FAILED\"}";
 			}
 			
 			//Update the user's balance
@@ -132,11 +131,11 @@ public class Buy extends HttpServlet {
 			rs2  = ps2.executeUpdate();
 			
 			if(rs2==0) {//It probably failed
-				return "{\"success\": false, \"message\": \"FAILED\"}";//TODO lint and check if this actually happens when it fails
+				return "{\"success\": false, \"message\": \"FAILED\"}";
 			}
 			
 			//Return success message
-			return "{\"success\": true, \"message\": \"SUCCESS: Executed purchase of 2 shares of "+ticker+" for $"+round(ask)+"\"}";//TODO lint
+			return "{\"success\": true, \"message\": \"SUCCESS: Executed purchase of 2 shares of "+ticker+" for $"+round(ask)+"\"}";
 			
 			
 		} catch (SQLException | ClassNotFoundException sqle) {
@@ -156,7 +155,7 @@ public class Buy extends HttpServlet {
 		}
 		
 		//If the code is here, we probably failed
-		return "{\"success\": false, \"message\": \"FAILED\"}";//TODO lint
+		return "{\"success\": false, \"message\": \"FAILED\"}";
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

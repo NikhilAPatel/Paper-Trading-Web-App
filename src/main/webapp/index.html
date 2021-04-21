@@ -187,6 +187,10 @@
 		}
 		
 		function buy(){
+			if(document.getElementById("buyField").value==null||document.getElementById("buyField").value==""||document.getElementById("buyField").value<=0){
+				alert("Purchase Failed: Please enter a valid quantity");
+				return;
+			}
 			console.log("buying "+ document.getElementById("buyField").value);
 			$.ajax({
 				url:"buy",
@@ -326,11 +330,9 @@
         });
         
         window.onload = function () {
-          // if (sessionStorage.getItem("hasCodeRunBefore") === null) {
-        //	   //TODO definitely delete some of this stuff, maybe delete goLogout()
-       // 	   goLogout();//So you don't have to clear your cookies on every run
-       // 	   sessionStorage.setItem("hasCodeRunBefore", true);
-          //  }
+        	//TODO delete, this just makes it so i don't have to login every tme
+        	sessionStorage.setItem("loggedIn", "true");
+        	sessionStorage.setItem("user_id", "1");
             if(sessionStorage.getItem("loggedIn")==="true"){
             	document.getElementById("site-header").innerHTML = "\
 	            	<a href=\"index.html\" onclick=\"goLogout()\" class=\"homeButton\" id=\"logoutButton\">Logout</a>\

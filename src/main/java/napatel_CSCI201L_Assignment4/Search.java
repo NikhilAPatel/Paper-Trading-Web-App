@@ -31,8 +31,6 @@ import static utils.Constants.tiingo_token;
 //TODO navbar formatting
 //TODO checkbox on signup page
 //TODO signup/login page formatting
-//TODO google login/signup
-//TODO check for email malformation
 
 @WebServlet("/Search")
 public class Search extends HttpServlet {
@@ -126,6 +124,7 @@ public class Search extends HttpServlet {
 		stock.roundVals();
 		stock.formatTimestamp();
 		stock.setMarketOpen();
+		stock.addToDb();
 		return gson.toJson(stock);
 	}
 }

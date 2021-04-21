@@ -1,9 +1,14 @@
 package models;
 
 import static utils.Utils.round;
+import static utils.Constants.dbAddress;
 import static utils.Utils.marketClosed;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.Date;
 import org.joda.time.DateTime;
@@ -213,6 +218,39 @@ public class Stock {
 	public void setMarketOpen() throws IOException {	
 		this.marketOpen=!marketClosed();
 	}
+	
+	public void addToDb() {
+		//Initialization
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int rs = 0;
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(dbAddress);
+
+			//Add the stock to the stock table if it isn't already there
+			ps = conn.prepareStatement("insert ignore into Stock (ticker) values (\""+this.ticker.toUpperCase()+"\")");
+			rs = ps.executeUpdate();
+			
+		} catch (SQLException | ClassNotFoundException sqle) {
+			sqle.printStackTrace();
+			System.out.println(sqle.getMessage());
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				System.out.println(sqle.getMessage());
+			}
+		}
+		
+	}
+	
 	@Override
 	public String toString() {
 		return "Stock [high=" + high + ", low=" + low + ", open=" + open + ", close=" + close + ", volume=" + volume
