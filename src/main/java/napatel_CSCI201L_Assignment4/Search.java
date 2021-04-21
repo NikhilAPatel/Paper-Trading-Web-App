@@ -56,7 +56,7 @@ public class Search extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private static String getStockDetails(String ticker) throws IOException {
+	public static String getStockDetails(String ticker) throws IOException {
 		URL url = new URL("https://api.tiingo.com/iex/" + ticker + "?token=" + tiingo_token);
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		con.setRequestMethod("GET");
@@ -87,7 +87,7 @@ public class Search extends HttpServlet {
 		}
 	}
 
-	private static String getAllStockDetails(Stock stock, String dailyDetails) throws IOException {
+	public static String getAllStockDetails(Stock stock, String dailyDetails) throws IOException {
 		URL url = new URL("https://api.tiingo.com/tiingo/daily/" + stock.getTicker() + "?token=" + tiingo_token);
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		StockMeta stockmeta;

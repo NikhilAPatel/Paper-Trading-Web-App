@@ -76,14 +76,13 @@ public class GoogleLogin extends HttpServlet {
 		  String userId = payload.getSubject();
 		  
 		  String ret = googleSSO(email, userId);
-		  System.out.println(ret);
 		  out.println(googleSSO(email, userId));
 		  return;
 		} else {
 		  System.out.println("Invalid ID token.");
 		  out.println("\"success\":false, \"message\":\"Google SSO Failed\"}");
+		  return;
 		}
-		out.println("\"success\":false, \"message\":\"Google SSO Failed\"}");
 	}
 	
 	//Accepts the validated email and id_token and either signs up the user or fails and returns JSON data
