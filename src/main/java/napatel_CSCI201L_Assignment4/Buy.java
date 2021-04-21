@@ -136,7 +136,7 @@ public class Buy extends HttpServlet {
 			}
 			
 			//Return success message
-			return "{\"success\": true, \"message\": \"SUCCESS: Executed purchase of 2 shares of "+ticker+" for $"+round(ask)+"\"}";
+			return "{\"success\": true, \"message\": \"SUCCESS: Executed purchase of "+quantity+" shares of "+ticker+" for $"+round(ask)+"\"}";
 			
 			
 		} catch (SQLException | ClassNotFoundException sqle) {

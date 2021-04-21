@@ -17,11 +17,7 @@
 				loggedOutSearch();
 			}
 		}
-		
-		function login(){
-			//TODO do login
-			sessionStorage.setItem("loggedIn", true);
-		}
+
 		
 		function loggedInSearch(){
 			$.ajax({
@@ -221,7 +217,7 @@
 						sessionStorage.setItem("tickerFavorite", "true");
 					}else{
 						document.getElementById("starimage").innerHTML="<input type=\"image\" class=\"starFormat\" src = \"star.svg\" onClick=\"favorite()\"\>";
-						sessionStorage.setItem("tickerFavorite", "true");
+						sessionStorage.setItem("tickerFavorite", "false");
 					}
 				}
 			});
@@ -331,8 +327,8 @@
         
         window.onload = function () {
         	//TODO delete, this just makes it so i don't have to login every tme
-        	sessionStorage.setItem("loggedIn", "true");
-        	sessionStorage.setItem("user_id", "1");
+        	/* sessionStorage.setItem("loggedIn", "true");
+        	sessionStorage.setItem("user_id", "1"); */
             if(sessionStorage.getItem("loggedIn")==="true"){
             	document.getElementById("site-header").innerHTML = "\
 	            	<a href=\"index.html\" onclick=\"goLogout()\" class=\"homeButton\" id=\"logoutButton\">Logout</a>\

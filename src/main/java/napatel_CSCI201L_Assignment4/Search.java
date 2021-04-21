@@ -31,6 +31,7 @@ import static utils.Constants.tiingo_token;
 //TODO navbar formatting
 //TODO checkbox on signup page
 //TODO signup/login page formatting
+//TODO if either last price or bid price is 0 during market open, use the last price
 
 @WebServlet("/Search")
 public class Search extends HttpServlet {
