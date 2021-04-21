@@ -6,6 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="search8.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/3500178f9e.js" crossorigin="anonymous"></script>
+	<script src="pss.js"></script>
+	<script src="logout.js"></script>
 	<script>
 		function search(){
 			var loggedIn = sessionStorage.getItem("loggedIn");
@@ -284,15 +286,8 @@
 			console.log("button to go portfolio clicked");
 		}
 		
-		function goLogout(){
-			//TODO
-			//Go home and reset everything in session storage
-			sessionStorage.clear();
-		}
+
 		
-		function pss(){//TODO dele
-			console.log(Object.keys(sessionStorage));
-		}
 	 
 	 
 	 
@@ -331,12 +326,11 @@
         });
         
         window.onload = function () {
-        	//TODO delete this if statement. it just makes it so i don't have to log in every time for testing
-           /* if (sessionStorage.getItem("hasCodeRunBefore") === null) {
-            	sessionStorage.setItem("loggedIn", "true");//TODO change back to false
-            	sessionStorage.setItem("user_id", "1");//TODO delete this and do it only when the user is successfully logged in
-            	sessionStorage.setItem("hasCodeRunBefore", true);
-            } */
+          // if (sessionStorage.getItem("hasCodeRunBefore") === null) {
+        //	   //TODO definitely delete some of this stuff, maybe delete goLogout()
+       // 	   goLogout();//So you don't have to clear your cookies on every run
+       // 	   sessionStorage.setItem("hasCodeRunBefore", true);
+          //  }
             if(sessionStorage.getItem("loggedIn")==="true"){
             	document.getElementById("site-header").innerHTML = "\
 	            	<a href=\"index.html\" onclick=\"goLogout()\" class=\"homeButton\" id=\"logoutButton\">Logout</a>\

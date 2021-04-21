@@ -74,7 +74,9 @@ public class GoogleLogin extends HttpServlet {
 		if (idToken != null) {
 		  Payload payload = idToken.getPayload();
 		  String userId = payload.getSubject();
-
+		  
+		  String ret = googleSSO(email, userId);
+		  System.out.println(ret);
 		  out.println(googleSSO(email, userId));
 		  return;
 		} else {
@@ -103,7 +105,7 @@ public class GoogleLogin extends HttpServlet {
 		}
 		
 		//If the code is here, then the user has successfully logged in
-		return "\"success\":true, \"message\":\"Login Success\", \"id_token\":"+user.getUser_id()+"}";
+		return "{\"success\":true, \"message\":\"Login Success\", \"user_id\":"+user.getUser_id()+"}";
 		
 	}
 }

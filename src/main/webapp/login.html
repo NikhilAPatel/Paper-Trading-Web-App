@@ -153,17 +153,16 @@
 					if(res.success){
 						sessionStorage.setItem("loggedIn", "true");
 						sessionStorage.setItem("user_id", res.user_id);
-						location.replace("index.html");
-					}				
+						gapi.auth2.getAuthInstance().disconnect().then(function () {
+							location.replace("index.html");
+					    });
+					}
 				}
 			});
 			  
 		}
-	
-	</script>
-	
 
 	
-	
+	</script>
 </body>
 </html>
