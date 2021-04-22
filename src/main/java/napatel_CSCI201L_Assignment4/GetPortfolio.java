@@ -89,7 +89,8 @@ public class GetPortfolio extends HttpServlet {
 		}
 
 		System.out.println(portfolio);
-		
+		Gson gson = new Gson();
+		out.println(gson.toJson(portfolio));
 		
 		
 				
