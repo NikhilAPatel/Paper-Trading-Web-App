@@ -230,7 +230,9 @@ public class Stock {
 			conn = DriverManager.getConnection(dbAddress);
 
 			//Add the stock to the stock table if it isn't already there
-			ps = conn.prepareStatement("insert ignore into Stock (ticker) values (\""+this.ticker.toUpperCase()+"\")");
+			ps = conn.prepareStatement("insert ignore into Stock (ticker, name) values (?, ?)");
+			ps.setString(1, ticker.toUpperCase());
+			ps.setString(2, name);
 			rs = ps.executeUpdate();
 			
 		} catch (SQLException | ClassNotFoundException sqle) {

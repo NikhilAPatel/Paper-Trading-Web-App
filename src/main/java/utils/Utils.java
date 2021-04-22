@@ -74,6 +74,8 @@ public final class Utils {
 						return stock.getTimestamp();
 					case "last":
 						return stock.getLast();
+					case "change":
+						return stock.getChange();
 					default:
 						break;
 				}
@@ -85,6 +87,37 @@ public final class Utils {
 		}
 		
 		return -1;
+	}
+	
+	public static final Stock getStock(String ticker) throws IOException {
+		URL url = new URL("https://api.tiingo.com/iex/" + ticker + "?token=" + tiingo_token);
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("GET");
+		con.setRequestProperty("Content-Type", "application/json");
+		con.setRequestProperty("Accept", "application/json");
+
+		// Case when ticker does not exist
+		if (con.getResponseCode() == 404) {
+			System.out.println(ticker + " 218937892does not exist. All involved trades will be purged.");
+			return null;
+		} else {
+			try {
+				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+				String inputLine;
+				StringBuffer response = new StringBuffer();
+				while ((inputLine = in.readLine()) != null) {
+					response.append(inputLine);
+				}
+				Gson gson = new GsonBuilder().create();
+				Stock stock = gson.fromJson(String.valueOf(response).replace("[", "").replace("]", ""), Stock.class);
+				return stock;
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(ticker + " 2837219873does not exist. All involved trades will be purged.");
+				return null;
+			}
+		}
 	}
 	
 	public static final float getUserBalance(int user_id) {
@@ -176,6 +209,53 @@ public final class Utils {
 			ps.setInt(1, user_id);
 			ps.setString(2, ticker);
 			
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				int os_id = rs.getInt("os_id");
+				int local_user_id = rs.getInt("user_id");
+				int stock_id = rs.getInt("stock_id");
+				int local_quantity = rs.getInt("quantity");
+				float purchase_price = rs.getFloat("purchase_price");
+				String timestamp = rs.getString("timestamp");
+				results.add(new OwnedStock(os_id, local_user_id, stock_id, local_quantity, purchase_price, timestamp));
+			}
+			
+			
+		} catch (SQLException | ClassNotFoundException sqle) {
+			sqle.printStackTrace();
+			System.out.println(sqle.getMessage());
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				System.out.println(sqle.getMessage());
+			}
+		}
+		Collections.sort(results);
+		return results;
+	}
+	
+	public static final ArrayList<OwnedStock> getAllOwnedStock(int user_id){
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs;
+		ArrayList<OwnedStock> results = new ArrayList<OwnedStock>();
+		
+		//Do the actual sell
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(dbAddress);
+
+			//Get all of this user's owned stock of this ticker
+			ps = conn.prepareStatement("select * from owned_stock where user_id = ?");
+			ps.setInt(1, user_id);			
 			
 			rs = ps.executeQuery();
 			
@@ -380,5 +460,45 @@ public final class Utils {
 			}
 		}
 		return new_id;
-	}	
+	}
+	
+	public static String getStockAttributeFromId(int id, String attribute) {
+		//Initialization
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs;
+		
+		//Do the actual sell
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(dbAddress);
+
+			//Get all of this user's owned stock of this ticker
+			ps = conn.prepareStatement("select * from Stock where stock_id=?");
+			ps.setInt(1, id);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				return rs.getString(attribute);
+			}
+			
+		} catch (SQLException | ClassNotFoundException sqle) {
+			sqle.printStackTrace();
+			System.out.println(sqle.getMessage());
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				System.out.println(sqle.getMessage());
+			}
+		}
+		
+		return null;
+	}
 }
