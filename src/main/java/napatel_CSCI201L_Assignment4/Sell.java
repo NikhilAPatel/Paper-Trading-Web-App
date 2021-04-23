@@ -70,20 +70,19 @@ public class Sell extends HttpServlet {
 		}
 		
 		//Return error if the market is closed
-//		if(marketClosed()) {
-//			out.println("{\"success\": false, \"message\": \"FAILED: Market is closed\"}"); //TODO lint
-//			return;//TODO can you do this in Java
-//		}
-//		
-//			
-//		//Do sell
-//		float bid = (float) getStockAttribute(ticker, "bid");
-//		if(bid==-1) {
-//			out.println("{\"success\": false, \"message\": \"FAILED\"}");
-//		}else if(bid==0) {
-//			bid = (float) getStockAttribute(ticker, "last");
-//		}
-		float bid =100;
+		if(marketClosed()) {
+			out.println("{\"success\": false, \"message\": \"FAILED: Market is closed\"}"); //TODO lint
+			return;//TODO can you do this in Java
+		}
+		
+			
+		//Do sell
+		float bid = (float) getStockAttribute(ticker, "bid");
+		if(bid==-1) {
+			out.println("{\"success\": false, \"message\": \"FAILED\"}");
+		}else if(bid==0) {
+			bid = (float) getStockAttribute(ticker, "last");
+		}
 		out.println(sell(user_id, ticker, bid, quantity));
 				
 	}
@@ -93,6 +92,7 @@ public class Sell extends HttpServlet {
 	public String sell(int user_id, String ticker, float bid, int quantity) {
 		//Initialization
 		float balance = getUserBalance(user_id);
+		final float original_quantity=quantity;
 		
 		//get all of this stock that this user owns
 		ArrayList<OwnedStock> ownedStock = getOwnedStock(user_id, ticker);
@@ -136,7 +136,7 @@ public class Sell extends HttpServlet {
 		}
 		
 		//If the code is here, we probably succeeded
-		return "{\"success\": true, \"message\": \"SUCCESS: Executed purchase of "+quantity+" shares of "+ticker+" for $"+round(bid)+"\"}";
+		return "{\"success\": true, \"message\": \"SUCCESS: Executed purchase of "+original_quantity+" shares of "+ticker+" for $"+round(bid)+"\"}";
 	}
 	
 	public static boolean sellStock(int os_id) {
