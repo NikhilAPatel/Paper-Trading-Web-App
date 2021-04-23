@@ -19,11 +19,14 @@
 		}
 
 		
-		function loggedInSearch(){
+		function loggedInSearch(query){
+			if(query===undefined){
+				query=document.searchForm.searchField.value;
+			}
 			$.ajax({
 		 		url: "Search",
 		 		data:{
-		 			query: document.searchForm.searchField.value
+		 			query: query
 		 		},
 		 		success: function(result){
 		 			document.getElementById("homeButton").classList.remove("border");
@@ -299,31 +302,21 @@
 	  <a class = "logo" onclick="goHome()" href="index.html">SalStocks</a>
 	</header>
 
-	<div id="homeDiv" class="homeDiv">
-		<h1 id="title" class="title">STOCK SEARCH</h1>
-		<form name="searchForm" method ="GET" action = "search();" id="search-form">
-			<div class="search">
-				<input type="text" class="round" id="searchField" name="searchField" placeholder="Enter stock ticker">
-				<input type="button" class ="corner" onclick="search()" id="searchButton" name="searchButton">
-			</div>
-		</form>		
-		<div id="errorDiv" class = "error"></div>
-		
-	</div>
+	<div id="homeDiv" class="homeDiv"></div>
 	
 		
 	
 	<script> 
-        $(window).ready(function() {
-        $("#search-form").on("keypress", function (event) {
-            var keyPressed = event.keyCode || event.which;
-            if (keyPressed === 13) {
-                event.preventDefault();
-                search();
-                return false;
-            }
-        });
-        });
+        function disableEnter() {
+	        $("#search-form").on("keypress", function (event) {
+	            var keyPressed = event.keyCode || event.which;
+	            if (keyPressed === 13) {
+	                event.preventDefault();
+	                search();
+	                return false;
+	            }
+	        });
+        }
         
         window.onload = function () {
         	//TODO delete, this just makes it so i don't have to login every tme
@@ -345,6 +338,22 @@
                 	<a class = \"logo\" onclick=\"goHome()\" href=\"index.html\">SalStocks</a>\
                 	<input type=\"button\" onclick=\"pss()\" value=\"print\"/>\
                 	";
+            }
+            if(sessionStorage.getItem("fromFavorites")!=null){
+            	loggedInSearch(sessionStorage.getItem("fromFavorites"));
+            	sessionStorage.removeItem("fromFavorites");
+            }else{
+            	document.getElementById("homeDiv").innerHTML="\
+            		<h1 id=\"title\" class=\"title\">STOCK SEARCH</h1>\
+            		<form name=\"searchForm\" method =\"GET\" action = \"search();\" id=\"search-form\">\
+            			<div class=\"search\">\
+            				<input type=\"text\" class=\"round\" id=\"searchField\" name=\"searchField\" placeholder=\"Enter stock ticker\">\
+            				<input type=\"button\" class =\"corner\" onclick=\"search()\" id=\"searchButton\" name=\"searchButton\">\
+            			</div>\
+            		</form>\
+            		<div id=\"errorDiv\" class = \"error\"></div>\
+            		"
+            	disableEnter();
             }
         }
     </script> 

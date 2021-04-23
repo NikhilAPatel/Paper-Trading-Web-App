@@ -36,6 +36,7 @@
 	    		},
 	    		success: function(res){
 	    			if(res.error){
+	    				document.getElementById("favoritesDiv").innerHTML="";
 	    				alert("Currently you don't have any stock in your favorites.")
 	    			}else{
 	    				for(i=0; i<res.length; i++){
@@ -57,7 +58,7 @@
 	    					console.log(res[i]);
 	    					
 	    					innerCode+= "\
-	    					<div id = \"fav"+i+"\" style=\"border-style:solid; border-color:#F2F2F2; width: 80%; float: middle; margin: auto; font-family: Arial, Helvetica, sans-serif;\">\
+	    					<div onclick= \"openDetails(\'"+res[i].ticker+"\')\" id = \"fav"+i+"\" style=\"border-style:solid; border-color:#F2F2F2; width: 80%; float: middle; margin: auto; font-family: Arial, Helvetica, sans-serif;\">\
 	    						<input type=\"image\" class=\"closeFormat\" onclick= \"remove(\'"+res[i].ticker+"\')\" src=\"window-close.svg\"\>\
 	    						<br/>\
 		    					<text class=\"favTicker\">&nbsp;&nbsp;"+res[i].ticker+"</text>\
@@ -95,6 +96,11 @@
 					}
 				}
 			});	
+		}
+		
+		function openDetails(ticker){
+			sessionStorage.setItem("fromFavorites", ticker);
+			location.replace("index.html");
 		}
 	
 	
