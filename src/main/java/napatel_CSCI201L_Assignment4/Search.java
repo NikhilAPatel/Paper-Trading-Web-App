@@ -32,6 +32,8 @@ import static utils.Constants.tiingo_token;
 //TODO signup/login page formatting
 //TODO test if either last price or bid price is 0 during market open, use the last price
 //TODO when you click on a ticker on the favorites page it should open the stock details
+//TODO round values on portfolio page
+//TODO portfolio page formatting
 
 @WebServlet("/Search")
 public class Search extends HttpServlet {

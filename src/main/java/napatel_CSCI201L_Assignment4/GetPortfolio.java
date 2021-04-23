@@ -25,6 +25,7 @@ import static utils.Utils.round;
 import static utils.Utils.getAllOwnedStock;
 import static napatel_CSCI201L_Assignment4.Search.getStockDetails;
 import static utils.Utils.getStockAttributeFromId;
+import static utils.Utils.calculateStockValue;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -88,12 +89,16 @@ public class GetPortfolio extends HttpServlet {
 			portfolio.add(new PortfolioStock(ticker, name, ownedStockGroups.get(i)));
 		}
 
-		System.out.println(portfolio);
+		float cashBalance = getUserBalance(user_id);
+		float totalAccountValue = cashBalance+calculateStockValue(portfolio);
+		
+		
 		Gson gson = new Gson();
-		out.println(gson.toJson(portfolio));
-		
-		
-				
+
+		String retString="{\"stocks\":";
+		retString+=gson.toJson(portfolio);
+		retString+=", \"balance\": "+cashBalance+", \"accountValue\": "+totalAccountValue+"}";
+		out.println(retString);			
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

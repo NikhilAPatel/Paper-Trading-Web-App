@@ -15,6 +15,11 @@
 	  <a class = "logo" onclick="goHome()" href="index.html">SalStocks</a>
 	</header>
 	
+	<br/>
+	<br/>
+	<div id="portfolioDiv" style="width: 80%; float: middle; margin: auto; font-family: Arial, Helvetica, sans-serif;">
+	</div>
+	
 	<script>
 		window.onload = function () {
 				displayPortfolio();
@@ -29,9 +34,134 @@
 				},
 				success: function(res){
 					console.log(res);	
+					innerCode="";
+					if(res.error){
+	    				document.getElementById("favoritesDiv").innerHTML="";
+	    				alert("Currently you don't have any stock in your favorites.")
+	    			}else{
+	    				innerCode+="<text style=\"font-size:large; font-family: Arial, Helvetica, sans-serif;\">My Portfolio</text>\
+							<text>Cash Balance: "+res.balance+"</text>\
+							<text>Total Account Value: "+res.accountValue+"</text>\
+							";
+	    				
+	    				for(i=0; i<res.stocks.length; i++){
+	    					var lastStyle="";
+			 				var percentStyle="";
+			 				var caretSrc="";
+	    					
+			 				if(res.stocks[i].change>=0){
+			 					changeStyle = "red";
+			 					caretSrc="caret-up.png";
+			 				}else{
+			 					changeStyle="green";
+			 					caretSrc="caret-down.png";
+			 				}
+	    					
+	    						    					
+	    					innerCode+= "\
+	    					<div id = \"portfolio"+i+"\" style=\"border-style:solid; border-width: thin;border-color:#F2F2F2; width: 100%; float: middle; margin: auto; font-family: Arial, Helvetica, sans-serif;\">\
+	    						<div style=\"border-style:solid; border-width:thin;border-color:#F2F2F2; background-color:#F7F7F7;\">\
+	    							<br/>\
+	    							<text class=\"favTicker\">"+res.stocks[i].ticker+"</text>\
+	    							<text class=\"favName\">"+res.stocks[i].name+"</text>\
+	    							<br/>\
+	    						</div>\
+	    						<div style=\"border-style:solid; border-width:thin;border-color:#F2F2F2;\">\
+		    						<div style=\"width: 49%; float: left; margin: auto;\">\
+		    							<text>Quantity:</text>\
+		    							<text class=\"right\">"+res.stocks[i].quantity+"</text>\
+		    							<br/>\
+		    							<text>Avg. Cost/Share:</text>\
+		    							<text class=\"right\">"+res.stocks[i].avgcost+"</text>\
+		    							<br/>\
+		    							<text>Total Cost:</text>\
+		    							<text class=\"right\">"+res.stocks[i].totalcost+"</text>\
+		    						</div>\
+		    						<div style=\"width: 49%; float: right; margin: auto; \">\
+		    							<text>Change:</text>\
+		    							<text class=\"right "+changeStyle+"\">"+res.stocks[i].change+"</text>\
+		    							<br/>\
+		    							<text>Curent Price:</text>\
+		    							<text class=\"right\">"+res.stocks[i].currentPrice+"</text>\
+		    							<br/>\
+		    							<text>Market Value:</text>\
+		    							<text class=\"right\">"+res.stocks[i].marketValue+"</text>\
+	    							</div>\
+	    							<br/>\
+	    							<br/>\
+	    							<br/>\
+	    						</div>\
+	    						<div style=\"border-style:solid; border-width:thin;border-color:#F2F2F2;background-color:#F7F7F7;\">\
+	    							<text style=\"\">Quantity: </text><input style=\"width:30px;\" id=\"quantfield"+i+"\" type=\"number\"/>\
+	    							<br/>\
+	    							<input type=\"radio\" name=\"buysell\" id=\"buy"+i+"\" value=\"BUY\"></input>\
+	    							<label for=\"buy\">BUY</label>\
+	    							<input type=\"radio\" name=\"buysell\" id=\"sell"+i+"\" value=\"SELL\"/>\
+	    							<label for=\"sell\">SELL</label>\
+	    							<br/>\
+	    							<input type=\"button\" onclick=\"doBuySell(\'"+i+"\', \'"+res.stocks[i].ticker+"\')\" value=\"Submit\">\
+	    						</div>\
+	    					</div>\
+	    					<br/>\
+	    					<br/>\
+	    					"
+	    				}
+	    			}
+	    			document.getElementById("portfolioDiv").innerHTML=innerCode;
 				}
 			});
 		}
+		
+		function doBuySell(i, ticker){
+			var quantity = document.getElementById("quantfield"+i).value;
+			
+			if(quantity<=0 || quantity==null || quantity==""){
+				alert("Please enter a valid quantity");
+				return;
+			}
+			
+			console.log(document.getElementById("buy"+i).checked);
+			
+			if(document.getElementById("buy"+i).checked){
+				buy(ticker, quantity);
+			}else if(document.getElementById("sell"+i).checked){
+				sell(ticker, quantity);
+			}else{
+				alert("Please indicate whether you are buying or selling");
+			}
+		}
+		
+		function buy(ticker, quantity){
+			$.ajax({
+				url:"buy",
+				data:{
+					ticker: ticker,
+					quantity: quantity,
+					user_id: sessionStorage.getItem("user_id")
+				},
+				success: function(res){
+					alert(res.message);
+					displayPortfolio()
+				}
+			})
+		}
+		
+		function sell(ticker, quantity){
+			$.ajax({
+				url:"sell",
+				data:{
+					ticker: ticker,
+					quantity: quantity,
+					user_id: sessionStorage.getItem("user_id")
+				},
+				success: function(res){
+					alert(res.message);
+					displayPortfolio()
+				}
+			})
+		}
+		
+		
 		
 		
 		

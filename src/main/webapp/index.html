@@ -322,6 +322,7 @@
         	//TODO delete, this just makes it so i don't have to login every tme
         	sessionStorage.setItem("loggedIn", "true");
         	sessionStorage.setItem("user_id", "1");
+        	//end delete here
             if(sessionStorage.getItem("loggedIn")==="true"){
             	document.getElementById("site-header").innerHTML = "\
 	            	<a href=\"index.html\" onclick=\"goLogout()\" class=\"homeButton\" id=\"logoutButton\">Logout</a>\

@@ -31,6 +31,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import models.OwnedStock;
+import models.PortfolioStock;
 import models.Stock;
 import models.User;
 
@@ -500,5 +501,13 @@ public final class Utils {
 		}
 		
 		return null;
+	}
+	
+	public static float calculateStockValue(ArrayList<PortfolioStock> portfolio) {
+		float value=0;
+		for(PortfolioStock s: portfolio) {
+			value+=s.getMarketValue();
+		}
+		return value;
 	}
 }
