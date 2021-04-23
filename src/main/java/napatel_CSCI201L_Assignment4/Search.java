@@ -34,6 +34,7 @@ import static utils.Constants.tiingo_token;
 //TODO when you click on a ticker on the favorites page it should open the stock details
 //TODO round values on portfolio page
 //TODO portfolio page formatting
+//TODO make sure that any google user can use signin https://piazza.com/class/kiwa914mk6939c?cid=777
 
 @WebServlet("/Search")
 public class Search extends HttpServlet {
