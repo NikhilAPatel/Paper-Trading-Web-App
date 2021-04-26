@@ -387,6 +387,7 @@
 	float:right;
 	padding-left: 20px;
 	width:20px;
+	z-index:100;
 }
 
 .right{
