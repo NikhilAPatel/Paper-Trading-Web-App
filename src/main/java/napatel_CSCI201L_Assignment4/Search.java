@@ -30,11 +30,7 @@ import static utils.Constants.tiingo_token;
 //TODO navbar formatting
 //TODO checkbox on signup page
 //TODO signup/login page formatting
-//TODO test if either last price or bid price is 0 during market open, use the last price
-//TODO when you click on a ticker on the favorites page it should open the stock details
-//TODO round values on portfolio page
 //TODO portfolio page formatting
-//TODO make sure that any google user can use signin https://piazza.com/class/kiwa914mk6939c?cid=777
 //TODO readme
 //TODO change db username and password to root before submit
 //TODO include dbcreate SQL script
