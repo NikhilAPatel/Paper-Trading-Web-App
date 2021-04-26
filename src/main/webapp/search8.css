@@ -236,6 +236,14 @@
 	color:#5AC43B;
 }
 
+.blackLast{
+	position: relative;
+	text-align: right;
+	float:right;
+	font-size: 30pt;
+	color:#000000;
+}
+
 .redLast{
 	position: relative;
 	text-align: right;
@@ -257,6 +265,13 @@
 	float:right;
 	font-size: 20pt;
 	color:#EC5D2A;
+}
+.blackPercent{
+	position: relative;
+	text-align: right;
+	float:right;
+	font-size: 20pt;
+	color:#000000;
 }
 
 .starFormat{

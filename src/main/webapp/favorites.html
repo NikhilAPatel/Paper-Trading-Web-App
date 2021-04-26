@@ -41,18 +41,18 @@
 	    				alert("Currently you don't have any stock in your favorites.")
 	    			}else{
 	    				for(i=0; i<res.length; i++){
-	    					var lastStyle="";
-			 				var percentStyle="";
+	    					var lastStyle="blackLast";
+			 				var percentStyle="blackPercent";
 			 				var caretSrc="";
-	    					
-			 				if(res[i].percentChange>=0){
+			 					    					
+			 				if(res[i].percentChange>0){
 			 					lastStyle = "greenLast";
 			 					percentStyle = "greenPercent";
-			 					caretSrc="caret-up.png";
-			 				}else{
+			 					caretSrc="<img src=\"caret-up.png\" class=\"caret\"\>";
+			 				}else if(res[i].percentChange<0){
 			 					lastStyle = "redLast"
 			 					percentStyle = "redPercent";
-			 					caretSrc="caret-down.png";
+			 					caretSrc="<img src=\"caret-down.png\" class=\"caret\"\>";
 			 				}
 	    					
 	    					
@@ -69,7 +69,7 @@
 		    					<br/>\
 		    					<br/>\
 		    					<text class=\"space "+percentStyle+"\">"+res[i].change+" ("+res[i].percentChange+")%</text>\
-		 						<img src=\""+caretSrc+"\" class=\"caret\"\>\
+		 						"+caretSrc+"\
 		    					<text class=\"favName\">&nbsp;&nbsp;&nbsp;"+res[i].name+"</text>\
 		    					<br/>\
 		    					<br/>\
