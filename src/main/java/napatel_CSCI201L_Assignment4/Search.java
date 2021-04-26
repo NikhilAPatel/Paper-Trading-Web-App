@@ -35,6 +35,9 @@ import static utils.Constants.tiingo_token;
 //TODO round values on portfolio page
 //TODO portfolio page formatting
 //TODO make sure that any google user can use signin https://piazza.com/class/kiwa914mk6939c?cid=777
+//TODO readme
+//TODO change db username and password to root before submit
+//TODO include dbcreate SQL script
 
 @WebServlet("/Search")
 public class Search extends HttpServlet {
