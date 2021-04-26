@@ -28,7 +28,6 @@ import static utils.Constants.tiingo_token;
 //TODO when going back from search to main page, need to delete/reset session variables of ticker and tickerfavorite
 //TODO no internet connection
 //TODO navbar formatting
-//TODO checkbox on signup page
 //TODO signup/login page formatting
 //TODO portfolio page formatting
 //TODO readme

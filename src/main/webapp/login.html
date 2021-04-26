@@ -39,10 +39,9 @@
 				<text class = "loginButtonText">Login</text>
 			</button>
 			<br>
+			<hr style="width:60%">
 			<br>
 			<div class="g-signin2" data-onsuccess="onSignIn"></div>
-			
-			
 		</form>
 	</div>
 	
@@ -69,8 +68,7 @@
 			<text class = "loginSubheader">Confirm Password</text>
 			<br>
 			<input type="password" id ="signUpConfirmPassword" class = "loginTextField" required/>
-			<br>
-			<br>
+			<input type="checkbox" style="width:10px; height:10px" id="terms"> <text class="loginSubheader">I have read and agree to all terms and conditions of SalEats.</text>
 			<button  onclick ="signUp()" class = "loginButton" type="button">
 				<img src="login.png" width="20px" height="20px">
 				<text class = "loginButtonText">Create Account</text>
@@ -123,6 +121,12 @@
 				return;
 			}
 			
+			//Make sure that the user has agreed to the terms and conditions
+			if(!document.getElementById("terms").checked){
+				alert("Signup Failed: Please agree to the terms and conditions");
+				return;
+			}
+			
 			$.ajax({
 				url:"signup",
 				data: {
@@ -171,8 +175,8 @@
 		}
 		
 		function validateEmail(email) {
-			const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-			return re.test(email);
+			const validFormat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return validFormat.test(email);
 		}
 
 	

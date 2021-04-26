@@ -70,20 +70,19 @@ public class Sell extends HttpServlet {
 		}
 		
 		//Return error if the market is closed
-//		if(marketClosed()) {
-//			out.println("{\"success\": false, \"message\": \"FAILED: Market is closed\"}"); //TODO lint
-//			return;//TODO can you do this in Java
-//		}
-//		
-//			
-//		//Do sell
-//		float bid = (float) getStockAttribute(ticker, "bid");
-//		if(bid==-1) {
-//			out.println("{\"success\": false, \"message\": \"FAILED\"}");
-//		}else if(bid==0) {
-//			bid = (float) getStockAttribute(ticker, "last");
-//		}
-		float bid=100;
+		if(marketClosed()) {
+			out.println("{\"success\": false, \"message\": \"FAILED: Market is closed\"}"); //TODO lint
+			return;//TODO can you do this in Java
+		}
+		
+			
+		//Do sell
+		float bid = (float) getStockAttribute(ticker, "bid");
+		if(bid==-1) {
+			out.println("{\"success\": false, \"message\": \"FAILED\"}");
+		}else if(bid==0) {
+			bid = (float) getStockAttribute(ticker, "last");
+		}
 		out.println(sell(user_id, ticker, bid, quantity));
 				
 	}
