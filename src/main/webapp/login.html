@@ -162,6 +162,8 @@
 						gapi.auth2.getAuthInstance().disconnect().then(function () {
 							location.replace("index.html");
 					    });
+					}else{
+						gapi.auth2.getAuthInstance().disconnect();
 					}
 				}
 			});
