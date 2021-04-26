@@ -32,10 +32,7 @@
 		 			document.getElementById("homeButton").classList.remove("border");
 		 			if(result.hasOwnProperty('error')){
 			 			$(errorDiv).html("<h2>"+result.errorMessage+"<\h2>");
-		 			}else{//Display the stock data
-		 				
-		 				console.log(result);//TODO delete
-		 				
+		 			}else{//Display the stock data		 				
 		 				//put the name of the ticker in session storage
 		 				sessionStorage.setItem("ticker", result.ticker);
 		 						 				

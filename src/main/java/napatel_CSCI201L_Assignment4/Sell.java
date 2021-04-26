@@ -136,6 +136,9 @@ public class Sell extends HttpServlet {
 			}
 		}
 		
+		//Update the balance
+		this.updateBalance(user_id, newBalance);
+		
 		//If the code is here, we probably succeeded
 		return "{\"success\": true, \"message\": \"SUCCESS: Executed purchase of "+original_quantity+" shares of "+ticker+" for $"+round(bid)+"\"}";
 	}
@@ -180,6 +183,43 @@ public class Sell extends HttpServlet {
 			}
 		}
 		return false;
+	}
+	
+	public void updateBalance(int user_id, float newBalance) {
+		//Initialization
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int rs;
+		String timestamp = getTimestamp();
+			
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(dbAddress);
+			
+			//Update the user's balance
+			ps = conn.prepareStatement("update User set balance = ? where user_id=?");
+			ps.setFloat(1, newBalance);
+			ps.setInt(2,  user_id);
+			
+			rs  = ps.executeUpdate();
+			
+			return;			
+			
+		} catch (SQLException | ClassNotFoundException sqle) {
+			sqle.printStackTrace();
+			System.out.println(sqle.getMessage());
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException sqle) {
+				System.out.println(sqle.getMessage());
+			}
+		}
 	}
 	
 	public static boolean sellPartialStock(int os_id, int quantity) {
