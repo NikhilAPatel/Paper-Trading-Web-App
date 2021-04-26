@@ -39,31 +39,37 @@
 	    				document.getElementById("favoritesDiv").innerHTML="";
 	    				alert("Currently you don't have any stock in your favorites.")
 	    			}else{
-	    				innerCode+="<text style=\"font-size:large; font-family: Arial, Helvetica, sans-serif;\">My Portfolio</text>\
-							<text>Cash Balance: "+res.balance+"</text>\
-							<text>Total Account Value: "+res.accountValue+"</text>\
+	    				innerCode+="<text style=\"font-size:large; font-weight: bold; font-family: Arial, Helvetica, sans-serif;\">My Portfolio</text>\
+	    					<br/>\
+							<text>&nbsp;&nbsp;&nbsp;Cash Balance: "+res.balance+"</text>\
+							<br/>\
+							<text>&nbsp;&nbsp;&nbsp;Total Account Value: <text style=\"background-color: #FFFF00\">"+res.accountValue+"</text></text>\
+							<br/>\<br/>\
 							";
 	    				
 	    				for(i=0; i<res.stocks.length; i++){
 	    					var lastStyle="";
 			 				var percentStyle="";
 			 				var caretSrc="";
+			 				
+			 				console.log(res.stocks[i].change);
 	    					
-			 				if(res.stocks[i].change>=0){
+			 				if(res.stocks[i].change<0){
 			 					changeStyle = "red";
-			 					caretSrc="caret-up.png";
-			 				}else{
+			 					caretSrc="<img src=\"caret-down.png\" class=\"smallcaret\"\>";
+			 				}else if(res.stocks[i].change>0){
 			 					changeStyle="green";
-			 					caretSrc="caret-down.png";
+			 					caretSrc="<img src=\"caret-up.png\" class=\"smallcaret\"\>";
+			 				}else{
+			 					changeStyle="black";
 			 				}
 	    					
 	    						    					
 	    					innerCode+= "\
-	    					<div id = \"portfolio"+i+"\" style=\"border-style:solid; border-width: thin;border-color:#F2F2F2; width: 100%; float: middle; margin: auto; font-family: Arial, Helvetica, sans-serif;\">\
+	    					<div id = \"portfolio"+i+"\" style=\"border-style:solid; line-height: 1.6; border-width: thin;border-color:#F2F2F2; width: 100%; float: middle; margin: auto; font-family: Arial, Helvetica, sans-serif;\">\
 	    						<div style=\"border-style:solid; border-width:thin;border-color:#F2F2F2; background-color:#F7F7F7;\">\
-	    							<br/>\
 	    							<text class=\"favTicker\">"+res.stocks[i].ticker+"</text>\
-	    							<text class=\"favName\">"+res.stocks[i].name+"</text>\
+	    							<text class=\"favName grey\">"+res.stocks[i].name+"</text>\
 	    							<br/>\
 	    						</div>\
 	    						<div style=\"border-style:solid; border-width:thin;border-color:#F2F2F2;\">\
@@ -79,7 +85,8 @@
 		    						</div>\
 		    						<div style=\"width: 49%; float: right; margin: auto; \">\
 		    							<text>Change:</text>\
-		    							<text class=\"right "+changeStyle+"\">"+res.stocks[i].change+"</text>\
+		    							<text class=\"right "+changeStyle+"\">"+res.stocks[i].change.toFixed(2)+"</text>\
+		    							"+caretSrc+"\
 		    							<br/>\
 		    							<text>Curent Price:</text>\
 		    							<text class=\"right\">"+res.stocks[i].currentPrice+"</text>\
@@ -91,8 +98,8 @@
 	    							<br/>\
 	    							<br/>\
 	    						</div>\
-	    						<div style=\"border-style:solid; border-width:thin;border-color:#F2F2F2;background-color:#F7F7F7;\">\
-	    							<text style=\"\">Quantity: </text><input style=\"width:30px;\" id=\"quantfield"+i+"\" type=\"number\"/>\
+	    						<div style=\"border-style:solid; text-align:center; border-width:thin;border-color:#F2F2F2;background-color:#F7F7F7;\">\
+	    							<text style=\"float:middle; text-align:center\">Quantity: </text><input style=\"width:30px;\" id=\"quantfield"+i+"\" type=\"number\"/>\
 	    							<br/>\
 	    							<input type=\"radio\" name=\"buysell\" id=\"buy"+i+"\" value=\"BUY\"></input>\
 	    							<label for=\"buy\">BUY</label>\

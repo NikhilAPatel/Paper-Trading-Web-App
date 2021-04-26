@@ -274,6 +274,14 @@
   	height: auto;
 }
 
+.smallcaret{
+	position: relative;
+	float:right;
+	padding-right: 5px;
+	width: 12px;
+  	height: auto;
+}
+
 .lhigh{
 	position: relative;
 	text-align: left;
@@ -392,4 +400,12 @@
 
 .red{
 	color:#EC5D2A;
+}
+
+.black{
+	color:#000000;
+}
+
+.grey{
+	color:#7E8388;
 }

@@ -3,6 +3,7 @@ package models;
 import java.io.IOException;
 import java.util.ArrayList;
 import static utils.Utils.getStock;
+import static utils.Utils.round;
 
 public class PortfolioStock {
 	private String ticker;
@@ -34,7 +35,13 @@ public class PortfolioStock {
 		//Calculate remaining variables
 		this.totalcost=this.avgcost*this.quantity;
 		this.marketValue=this.quantity*this.currentPrice;
-		this.change=this.avgcost-stock.getLast();
+		this.change=(this.avgcost-stock.getLast())*-1;
+		
+		round(this.avgcost);
+		round(this.totalcost);
+		round(this.change);
+		round(this.currentPrice);
+		round(this.marketValue);
 	}
 
 	public String getTicker() {
