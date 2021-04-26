@@ -28,8 +28,8 @@ import static utils.Constants.tiingo_token;
 //TODO when going back from search to main page, need to delete/reset session variables of ticker and tickerfavorite
 //TODO no internet connection
 //TODO navbar formatting
-//TODO signup/login page formatting
 //TODO portfolio page formatting
+//TODO delete stuff used for debug mode
 //TODO readme
 //TODO change db username and password to root before submit
 //TODO include dbcreate SQL script
