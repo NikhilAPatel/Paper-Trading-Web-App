@@ -316,25 +316,19 @@
         }
         
         window.onload = function () {
-        	//TODO delete, this just makes it so i don't have to login every tme
-        	sessionStorage.setItem("loggedIn", "true");
-        	sessionStorage.setItem("user_id", "1");
-        	//end delete here
             if(sessionStorage.getItem("loggedIn")==="true"){
             	document.getElementById("site-header").innerHTML = "\
 	            	<a href=\"index.html\" onclick=\"goLogout()\" class=\"homeButton\" id=\"logoutButton\">Logout</a>\
 	            	<a href=\"portfolio.html\" onclick=\"goPortfolio()\" class=\"homeButton\" id=\"portfolioPageButton\">Portfolio</a>\
 	            	<a href=\"favorites.html\" onclick=\"goFavorites()\" class=\"homeButton\" id=\"favoriteButton\">Favorites</a>\
-	            	<a href=\"index.html\" onclick=\"goHome()\" class=\"homeButton border\" id=\"homeButton\">Home/Search</a>\
+	            	<a href=\"index.html\" onclick=\"goHome()\" class=\"homeButton border white\" id=\"homeButton\">Home/Search</a>\
 	            	<a class = \"logo\" onclick=\"goHome()\" href=\"index.html\">SalStocks</a>\
-	            	<input type=\"button\" onclick=\"pss()\" value=\"print\"/>\
 	            	";
             }else{
             	document.getElementById("site-header").innerHTML = "\
                 	<a href=\"login.html\" class=\"homeButton\" id=\"loginPageButton\">Login/Sign Up</a>\
-                	<a href=\"index.html\" onclick=\"goHome()\" class=\"homeButton border\" id=\"homeButton\">Home/Search</a>\
+                	<a href=\"index.html\" onclick=\"goHome()\" class=\"homeButton border white\" id=\"homeButton\">Home/Search</a>\
                 	<a class = \"logo\" onclick=\"goHome()\" href=\"index.html\">SalStocks</a>\
-                	<input type=\"button\" onclick=\"pss()\" value=\"print\"/>\
                 	";
             }
             if(sessionStorage.getItem("fromFavorites")!=null){

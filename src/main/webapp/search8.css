@@ -330,7 +330,7 @@
 }
 
 .homeButton {
-	color: #FFFFFF;
+	color: #BFABFF;
 	margin-right: 10px;
 	margin-top:5px;
 	text-decoration: none;
@@ -345,6 +345,10 @@
 	padding: 3px;
 	margin-top:2px;
   	border: 1px solid #FFFFFF;
+}
+
+.white{
+	color:#FFFFFF;
 }
 
 .hidden{

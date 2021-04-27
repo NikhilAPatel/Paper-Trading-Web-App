@@ -23,14 +23,10 @@ import static utils.Constants.tiingo_token;
 
 
 //General todos
-//TODO if addFavorite does fail for some reason, the button never illuminates (which is good), but there is also no error message. I think it is because somehow the ajax callback is never run
 //TODO when going back from search to main page, need to delete/reset session variables of ticker and tickerfavorite
-//TODO no internet connection
 //TODO navbar formatting
 //TODO delete stuff used for debug mode
-//TODO readme
 //TODO change db username and password to root before submit
-//TODO include dbcreate SQL script
 
 @WebServlet("/Search")
 public class Search extends HttpServlet {
@@ -48,7 +44,11 @@ public class Search extends HttpServlet {
 		String query = request.getParameter("query");
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
-		out.println(getStockDetails(query));
+		try {
+			out.println(getStockDetails(query));
+		}catch(Exception e) {
+			out.println("{\"error\": true, \"errorMessage\":\"Please check your internet connection and try again\"}");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
