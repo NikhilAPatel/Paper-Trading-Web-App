@@ -1,17 +1,20 @@
 package napatel_CSCI201L_Assignment4;
 
+import static utils.Constants.tiingo_token;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,13 +22,7 @@ import com.google.gson.GsonBuilder;
 import models.Stock;
 import models.StockMeta;
 
-import static utils.Constants.tiingo_token;
-
-
 //General todos
-//TODO when going back from search to main page, need to delete/reset session variables of ticker and tickerfavorite
-//TODO navbar formatting
-//TODO delete stuff used for debug mode
 //TODO change db username and password to root before submit
 
 @WebServlet("/Search")
@@ -46,7 +43,7 @@ public class Search extends HttpServlet {
 		response.setContentType("application/json");
 		try {
 			out.println(getStockDetails(query));
-		}catch(Exception e) {
+		} catch (Exception e) {
 			out.println("{\"error\": true, \"errorMessage\":\"Please check your internet connection and try again\"}");
 		}
 	}
@@ -112,7 +109,8 @@ public class Search extends HttpServlet {
 				}
 				stockmeta = gson.fromJson(String.valueOf(response).replace("[", "").replace("]", ""), StockMeta.class);
 			} catch (Exception e) {
-				System.out.println(stock.getTicker() + "  2987389217does not exist. All involved trades will be purged.");
+				System.out
+						.println(stock.getTicker() + "  2987389217does not exist. All involved trades will be purged.");
 				return "{\"error\": \"true\", \"errorMessage\":\"Ticker " + stock.getTicker().toUpperCase()
 						+ " does not exist\"}";
 			}

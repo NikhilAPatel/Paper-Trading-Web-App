@@ -1,8 +1,9 @@
 package napatel_CSCI201L_Assignment4;
 
+import static utils.Constants.dbAddress;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,19 +13,9 @@ import java.sql.SQLException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-
-import static utils.Constants.dbAddress;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import models.Stock;
-import models.StockMeta;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/IsFavorite")
 public class IsFavorite extends HttpServlet {
@@ -47,31 +38,29 @@ public class IsFavorite extends HttpServlet {
 		PreparedStatement ps = null;
 		PreparedStatement ps2 = null;
 		ResultSet rs;
-		int count=0;
-		
-		
+		int count = 0;
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbAddress);
 
-			ps = conn.prepareStatement("select count(1) from Favorite where stock_id=(select stock_id from Stock where ticker=? )");
-			ps.setString(1,  ticker);
-			
+			ps = conn.prepareStatement(
+					"select count(1) from Favorite where stock_id=(select stock_id from Stock where ticker=? )");
+			ps.setString(1, ticker);
+
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				count = rs.getInt("count(1)");
 			}
-			System.out.println("count is "+count);
-			
-			if(count>=1) {
+			System.out.println("count is " + count);
+
+			if (count >= 1) {
 				out.println("{\"favorite\":\"true\"}");
-			}else {
+			} else {
 				out.println("{\"favorite\":\"false\"}");
 			}
-			
-			
-			
+
 		} catch (SQLException | ClassNotFoundException sqle) {
 			sqle.printStackTrace();
 			System.out.println(sqle.getMessage());
@@ -84,7 +73,6 @@ public class IsFavorite extends HttpServlet {
 					conn.close();
 				}
 			} catch (SQLException sqle) {
-				// TODO handle
 				System.out.println(sqle.getMessage());
 			}
 		}
