@@ -248,7 +248,7 @@ public final class Utils {
 			conn = DriverManager.getConnection(dbAddress);
 
 			// Get all of this user's owned stock of this ticker
-			ps = conn.prepareStatement("select * from owned_stock where user_id = ?");
+			ps = conn.prepareStatement("select * from Owned_Stock where user_id = ?");
 			ps.setInt(1, user_id);
 
 			rs = ps.executeQuery();
