@@ -1,4 +1,4 @@
-# SalStocks
+# Papyrus
  Online Paper Trading Platform
 
 The code is optimized for a modern browser, like Google Chrome, for a resoluton of around 1800x1000. The code should still work as long as the browser window is not abnormally small.
@@ -9,3 +9,4 @@ If you need to change the SQL username or password, the database address can be 
 
 Please run the code from index.html, which can be found at src/main/webapp/index.html. The url of the webpage should be http://localhost:8080/salstocks/index.html
 
+Or, visit the deployed code here: https://papyrus.herokuapp.com/
