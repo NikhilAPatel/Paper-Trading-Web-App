@@ -36,6 +36,7 @@
 		
 		
 		function displayPortfolio(){
+			innerCode="";
 			$.ajax({
 				url:"GetPortfolio",
 				data:{
@@ -43,10 +44,16 @@
 				},
 				success: function(res){
 					console.log(res);	
-					innerCode="";
 					if(res.error){
 	    				document.getElementById("portfolioDiv").innerHTML="";
 	    				alert("Currently you don't have any stock in your portfolio.")
+	    				innerCode+="<text style=\"font-size:large; font-weight: bold; font-family: Arial, Helvetica, sans-serif;\">My Portfolio</text>\
+	    					<br/>\
+							<text>&nbsp;&nbsp;&nbsp;Cash Balance: "+res.balance+"</text>\
+							<br/>\
+							<text>&nbsp;&nbsp;&nbsp;Total Account Value: <text style=\"background-color: #FFFF00\">"+res.accountValue+"</text></text>\
+							<br/>\<br/>\
+							";
 	    			}else{
 	    				innerCode+="<text style=\"font-size:large; font-weight: bold; font-family: Arial, Helvetica, sans-serif;\">My Portfolio</text>\
 	    					<br/>\
@@ -123,9 +130,10 @@
 	    					"
 	    				}
 	    			}
-	    			document.getElementById("portfolioDiv").innerHTML=innerCode;
+	   
 				}
 			});
+			document.getElementById("portfolioDiv").innerHTML=innerCode;
 		}
 		
 		function doBuySell(i, ticker){
