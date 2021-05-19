@@ -50,7 +50,8 @@ public class GetPortfolio extends HttpServlet {
 
 		// If the user owns no stock, return an error
 		if (ownedStock.isEmpty()) {
-			out.println("{\"error\":true}");
+			float balance = getUserBalance(user_id);
+			out.println("{\"error\":true, \"balance\":"+balance+", \"accountValue\":"+balance+"}");
 			return;
 		}
 
