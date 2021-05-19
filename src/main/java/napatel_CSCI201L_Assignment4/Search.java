@@ -23,7 +23,8 @@ import models.Stock;
 import models.StockMeta;
 
 //General todos
-//TODO change db username and password to root before submit
+//TODO hide logins
+//TODO if you unfavorite from favorites page, then on search, the stock will still be favorited
 
 @WebServlet("/Search")
 public class Search extends HttpServlet {
