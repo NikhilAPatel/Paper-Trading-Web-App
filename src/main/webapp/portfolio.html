@@ -47,13 +47,13 @@
 					var innerCode="";
 					if(res.error){
 	    				document.getElementById("portfolioDiv").innerHTML="";
-	    				alert("Currently you don't have any stock in your portfolio.")
 	    				innerCode+="<text style=\"font-size:large; font-weight: bold; font-family: Arial, Helvetica, sans-serif;\">My Portfolio</text>\
 	    					<br/>\
-							<text>&nbsp;&nbsp;&nbsp;Cash Balance: "+res.balance+"</text>\
+							<text>&nbsp;&nbsp;&nbsp;Cash Balance: $"+res.balance+"</text>\
 							<br/>\
-							<text>&nbsp;&nbsp;&nbsp;Total Account Value: <text style=\"background-color: #FFFF00\">"+res.accountValue+"</text></text>\
+							<text>&nbsp;&nbsp;&nbsp;Total Account Value: <text style=\"background-color: #FFFF00\">$"+res.accountValue+"</text></text>\
 							<br/>\<br/>\
+							<text style=\"font-size:large; font-weight: bold; font-family: Arial, Helvetica, sans-serif;\">You Currently Do Not Own Any Stock</text>\
 							";
 	    			}else{
 	    				innerCode+="<text style=\"font-size:large; font-weight: bold; font-family: Arial, Helvetica, sans-serif;\">My Portfolio</text>\

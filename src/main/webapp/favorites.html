@@ -44,8 +44,7 @@
 	    		},
 	    		success: function(res){
 	    			if(res.error){
-	    				document.getElementById("favoritesDiv").innerHTML="";
-	    				alert("Currently you don't have any stock in your favorites.")
+	    				document.getElementById("favoritesDiv").innerHTML="<text style=\"font-size:large; font-weight: bold; font-family: Arial, Helvetica, sans-serif;\">You Currently Do Not Have Any Stock Favorited</text>";
 	    			}else{
 	    				for(i=0; i<res.length; i++){
 	    					var lastStyle="blackLast";
