@@ -36,14 +36,15 @@
 		
 		
 		function displayPortfolio(){
-			innerCode="";
+			
 			$.ajax({
 				url:"GetPortfolio",
 				data:{
 					user_id: sessionStorage.getItem("user_id")
 				},
 				success: function(res){
-					console.log(res);	
+					console.log(res);
+					var innerCode="";
 					if(res.error){
 	    				document.getElementById("portfolioDiv").innerHTML="";
 	    				alert("Currently you don't have any stock in your portfolio.")
@@ -130,10 +131,9 @@
 	    					"
 	    				}
 	    			}
-	   
+					document.getElementById("portfolioDiv").innerHTML=innerCode;
 				}
 			});
-			document.getElementById("portfolioDiv").innerHTML=innerCode;
 		}
 		
 		function doBuySell(i, ticker){
