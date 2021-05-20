@@ -101,6 +101,7 @@
 				success: function(resp){
 					if(resp.removed==="true"){
 						displayFavorites();
+						sessionStorage.setItem("tickerFavorite", "false");
 					}
 				}
 			});	
