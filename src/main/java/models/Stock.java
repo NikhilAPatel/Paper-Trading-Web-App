@@ -215,6 +215,7 @@ public class Stock {
 	
 	public void setMarketOpen() throws IOException {	
 		this.marketOpen=!marketClosed();
+		this.marketOpen=true;
 	}
 	
 	public void addToDb() {
