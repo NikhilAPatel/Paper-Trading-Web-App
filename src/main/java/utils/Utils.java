@@ -173,7 +173,8 @@ public final class Utils {
 
 		// If the time is outside of 6:30am PDT and 1:00pm PDT, the market is closed
 		int current_time = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
-		System.out.println(current_time);
+		System.out.println(cal.get(Calendar.HOUR_OF_DAY));
+		System.out.println(cal.get(Calendar.MINUTE));
 		if (current_time < market_open || current_time >= market_close) {
 			return true;
 		}
